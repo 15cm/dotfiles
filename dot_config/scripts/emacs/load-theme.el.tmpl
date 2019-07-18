@@ -1,0 +1,7 @@
+(when spacemacs--cur-theme
+  (disable-theme spacemacs--cur-theme))
+{{- if eq .global.theme "light"}}
+(spacemacs/load-theme 'solarized-light)
+{{- else}}
+(spacemacs/load-theme 'sanityinc-tomorrow-night)
+{{- end}}

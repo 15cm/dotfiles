@@ -1,0 +1,28 @@
+{
+  "auto_login": {
+    "enable": true
+  },
+  "code": {
+    "editor": "vim",
+    "lang": "cpp"
+  },
+  "color": {
+    "enable": true,
+    {{- if eq .global.theme "light"}}
+    "theme": "solarized.light"
+    {{- else}}
+    "theme": "dark"
+    {{- end}}
+  },
+  "icon": {
+    {{- if eq .global.theme "light"}}
+    "theme": "solarized.light"
+    {{- else}}
+    "theme": "dark"
+    {{- end}}
+  },
+  "network": {
+    "concurrency": 10
+  },
+  "plugins": {}
+}

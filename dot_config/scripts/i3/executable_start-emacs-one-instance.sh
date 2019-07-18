@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -S /tmp/emacs$UID/server ]; then
+  emacsclient -s server -c
+else
+  LC_CTYPE=zh_CN.UTF-8 emacs
+fi

@@ -1,0 +1,91 @@
+{
+    "name": "Solarized light for shell",
+    "groups": {
+      "cwd": "information:additional",
+      "cwd:current_folder": "information:regular",
+      "cwd:divider": {
+        "fg": "gray10",
+        "bg": "cornflowerblue",
+        "attrs": []
+      },
+        "vcs:clean": {
+            "fg": "solarized:base3",
+            "bg": "solarized:green",
+            "attrs": []
+        },
+      "mode": {
+        "fg": "solarized:base3",
+        "bg": "solarized:green",
+        "attrs": [
+          "bold"
+        ]
+      },
+      "gitstatus": "vcs:clean",
+      "gitstatus_branch": "vcs:clean",
+      "gitstatus_branch_clean": "vcs:clean",
+      "gitstatus_branch_dirty": "warning:regular",
+      "gitstatus_branch_detached": {
+        "fg": "mediumpurple",
+        "bg": "solarized:red",
+        "attrs": []
+      },
+      "gitstatus_tag": {
+        "fg": "darkcyan",
+        "bg": "gray2",
+        "attrs": []
+      },
+      "gitstatus_behind": {
+        "fg": "solarized:base3",
+        "bg": "solarized:orange",
+        "attrs": []
+      },
+      "gitstatus_ahead": {
+        "fg": "solarized:base3",
+        "bg": "green",
+        "attrs": []
+      },
+      "gitstatus_staged": {
+        "fg": "solarized:base2",
+        "bg": "lightyellowgreen",
+        "attrs": []
+      },
+      "gitstatus_unmerged": {
+        "fg": "brightred",
+        "bg": "gray2",
+        "attrs": []
+      },
+      "gitstatus_changed": {
+        "fg": "orangered",
+        "bg": "gray2",
+        "attrs": []
+      },
+      "gitstatus_untracked": {
+        "fg": "brightestorange",
+        "bg": "gray2",
+        "attrs": []
+      },
+      "gitstatus_stashed": {
+        "fg": "darkblue",
+        "bg": "gray2",
+        "attrs": []
+      },
+      "gitstatus:divider": {
+        "fg": "gray8",
+        "bg": "gray2",
+        "attrs": []
+      }
+    },
+  "mode_translations": {
+    "vicmd": {
+      "groups": {
+        "mode": {
+          "fg": "solarized:base3",
+          "bg": "solarized:blue",
+          "attrs": [
+            "bold"
+          ]
+        }
+      }
+    }
+  }
+}

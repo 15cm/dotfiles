@@ -1,0 +1,6 @@
+QT_QPA_PLATFORMTHEME="qt5ct"
+GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
+GTK_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+QT_IM_MODULE=fcitx

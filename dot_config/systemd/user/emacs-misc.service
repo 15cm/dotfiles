@@ -1,0 +1,8 @@
+[Unit]
+Description=Emacs Misc
+
+[Service]
+ExecStart=/usr/bin/emacs --fg-daemon=misc
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,58 @@
+{
+  "segments": {
+    "above": [
+      {
+	    "left": [
+	      {
+		    "function": "powerline.segments.shell.cwd",
+            "args": {
+              "dir_limit_depth": 3
+            },
+		    "priority": 10
+	      }
+	    ],
+	    "right": [
+          {
+	        "type": "string",
+	        "highlight_groups": ["background"],
+	        "draw_soft_divider": false,
+	        "draw_hard_divider": false,
+	        "width": "auto"
+          },
+          {
+            "function": "powerline_gitstatus.gitstatus",
+            "priority": 40
+          }
+	    ]
+      }
+    ],
+    "left": [
+      {
+        "function": "powerline.segments.shell.mode",
+        "args": {
+          "override": {
+            "vicmd": "C",
+            "viins": "I"
+          }
+        }
+      }
+	],
+	"right": [
+	  {
+		"function": "powerline.segments.shell.last_status",
+		"priority": 10
+	  },
+      {
+		"function": "powerline.segments.shell.jobnum",
+		"priority": 20
+	  },
+      {
+        "function": "powerline.segments.common.time.date",
+        "args": {
+          "istime": true,
+          "format": "%H:%M:%S"
+        }
+      }
+	]
+  }
+}

@@ -1,0 +1,10 @@
+[Unit]
+Description=Aria2 Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/aria2c --conf-path=%h/.aria2/aria2.conf
+Restart=on-success
+
+[Install]
+WantedBy=default.target

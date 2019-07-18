@@ -1,0 +1,11 @@
+[Unit]
+Description=Compositing manager
+
+[Service]
+Environment="DISPLAY=:0"
+ExecStart=/usr/bin/compton
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=xsession.target

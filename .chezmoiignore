@@ -1,0 +1,17 @@
+README.md
+
+{{- if ne .chezmoi.os "darwin"}}
+..config/launch-agents
+{{- end}}
+
+{{- if eq .chezmoi.os "darwin"}}
+.config/redshift/
+.config/scripts/firefox/
+.config/scripts/i3/
+.config/systemd/user/
+.config/compton.conf
+.x/
+.Xresources
+.local/bin/fix-desktop-entries.sh
+.pam_environment
+{{- end}}

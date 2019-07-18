@@ -1,0 +1,9 @@
+[Unit]
+Description=Hide X mouse cursor when unneeded
+
+[Service]
+Environment="DISPLAY=:0"
+ExecStart=/usr/bin/unclutter
+
+[Install]
+WantedBy=xsession.target
