@@ -30,7 +30,7 @@ cmd_exists i3-msg && i3-msg restart &
 
 # Powerline
 cmd_exists powerline-daemon && powerline-daemon --replace \
-  && cmd_exists tmux && tmux source "/home/sinkerine/.config/powerline/bindings/tmux/powerline.conf" &
+  && cmd_exists tmux && tmux source "$HOME/.config/powerline/bindings/tmux/powerline.conf" &
 
 # Emacs
 if cmd_exists emacsclient; then
