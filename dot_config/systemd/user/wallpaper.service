@@ -3,7 +3,7 @@ Description=Set Wallpaper
 After=xorg.target
 
 [Service]
-ExecStart=/usr/bin/feh --bg-fill %h/Pictures/wallpaper/main
+ExecStart=/usr/bin/nitrogen --restore
 Type=oneshot
 RemainAfterExit=no
 
