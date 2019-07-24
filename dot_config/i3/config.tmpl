@@ -170,7 +170,7 @@ mode "launcher" {
      bindsym s exec "flameshot gui"; mode "default"
      bindsym d exec dolphin; mode "default"
      bindsym r exec rambox; mode "default"
-     bindsym c exec clementine; mode "default"
+     bindsym c exec chromium; mode "default"
      bindsym l exec telegram-desktop; mode "default"
      bindsym Escape mode "default"
 }
@@ -309,7 +309,6 @@ exec --no-startup-id autorandr -l default
 
 # Starting things with i3
 exec --no-startup-id sleep 3 && systemctl --user start xsession.target
-
 
 # Border Colors
 # class                 border  backgr. text    indicator child_border
