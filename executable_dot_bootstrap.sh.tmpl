@@ -1,0 +1,287 @@
+#!/bin/bash
+# sudo, git, yadm should be installed manually first
+bin_exists() {
+  command -v $1 >/dev/null 2>&1
+}
+
+is_arch () {
+  bin_exists pacman
+}
+
+is_osx() {
+  [ "$(uname -s)" = 'Darwin' ]
+}
+
+# args: name [packages]
+ins_wrap() {
+  local bin=$1
+  if [ "$#" -eq 1 ]; then
+    local pacs=$1
+  else
+    local pacs="${*:2}"
+  fi
+  bin_exists "$bin" || $pacman_install "$pacs"
+}
+
+install_common_pac() {
+  ins_wrap sudo
+  ins_wrap curl
+  ins_wrap wget
+  ins_wrap vim
+  ins_wrap tmux
+  ins_wrap zsh
+  ins_wrap jq
+  ins_wrap rg ripgrep
+  ins_wrap ag the_silver_searcher
+  ins_wrap bc
+  ins_wrap highlight
+}
+
+fetch_url_github_latest_release_binary() {
+  local repo=${1}
+  local name_pattern=${2}
+  curl -s https://api.github.com/repos/${1}/releases/latest \
+       | grep "browser_download_url.*${2}" \
+       | cut -d : -f 2,3 \
+       | tr -d \"
+}
+
+if is_osx; then
+  pacman_install="brew install"
+
+  # brew
+  if [[ ! -f '/usr/local/bin/brew' ]]; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  # Update source
+  brew update
+
+  # Install common packages
+  install_common_pac
+
+  # gpg
+  brew install gpg
+
+  # Coreutils
+  ins_wrap gls coreutils
+  ins_wrap gsed gnu-sed
+  # ALso use gsed in this script
+  PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+  # pip & Powerline
+  BREW_PYTHON="/usr/local/bin/python3"
+  BREW_PIP="/usr/local/bin/pip"
+  [[ -f $BREW_PYTHON ]] || $pacman_install python
+  which pip > /dev/null || curl https://bootstrap.pypa.io/get-pip.py | $BREW_PYTHON
+  $BREW_PIP install powerline-status
+  $BREW_PIP install powerline-gitstatus
+
+  # exa
+  ins_wrap exa
+
+  # pyenv
+  ins_wrap pyenv
+
+  # rbenv
+  ins_wrap rbenv
+
+  # fd
+  ins_wrap fd
+
+  # ranger
+  ins_wrap ranger
+
+  # clipper
+  brew install clipper && brew services start clipper
+
+  # ispell
+  ins_wrap ispell
+
+  # pdftotext
+  ins_wrap pdftotext poppler
+
+  # Brew cask
+  brew tap homebrew/cask-fonts
+  brew cask install \
+       font-inconsolatalgc-nerd-font-mono \
+       karabiner-elements \
+       bartender \
+       resilio-sync \
+       istat-menus \
+       emacs \
+       amethyst \
+       rambox \
+       google-chrome \
+       alfred \
+       keepassxc \
+       bettertouchtool \
+       alacritty
+else
+  # Choose package manager according to distribution
+  # Update source
+  if is_arch; then
+    bin_exists yay || (cd /tmp && git clone https://aur.archlinux.org/yay.git && makepkg -si)
+    pacman_install="sudo yay -S --noconfirm"
+    yay -Sy
+  else
+    pacman_install="sudo apt-get -y install"
+    sudo apt-get update
+  fi
+
+  # Create folders
+  [ -d ~/local/log ] || mkdir -p ~/local/log
+
+  # Install common packages
+  install_common_pac
+
+  # netcat
+  if is_arch; then
+    ins_wrap nc openbsd-netcat
+  else
+    ins_wrap nc netcat
+  fi
+
+  # pip & Powerline
+  SYS_PYTHON="/usr/bin/python"
+  SYS_PIP="/usr/bin/pip"
+  [[ -f $SYS_PYTHON ]] || $pacman_install python
+  [[ -f $SYS_PIP ]] || $pacman_install python-pip
+  sudo $SYS_PIP install powerline-status
+  sudo $SYS_PIP install powerline-gitstatus
+
+  # exa
+  if is_arch; then
+    ins_wrap exa
+  else
+    if ! bin_exists exa; then
+      tmpf=$(mktemp)
+      wget $(fetch_url_github_latest_release_binary ogham/exa linux-x86_64) -O "$tmpf" \
+        && unzip "$tmpf" -d ~/local/bin \
+        && rm "$tmpf" \
+        && mv ~/local/bin/exa-linux-x86_64 ~/local/bin/exa
+    fi
+  fi
+
+  # Keychain
+  ins_wrap keychain
+
+  # fd
+  if is_arch; then
+    ins_wrap fd fd-rs
+  else
+    if ! bin_exists fd; then
+      tmpf=$(mktemp)
+      wget $(fetch_url_github_latest_release_binary sharkdp/fd amd64.deb) -O ${tmpf} \
+        && sudo dpkg -i ${tmpf} \
+        && rm ${tmpf}
+    fi
+  fi
+
+  # ranger
+  if is_arch; then
+     ins_wrap ranger
+  else
+    git clone --depth 1 https://github.com/ranger/ranger.git /tmp/ranger \
+      && (cd /tmp/ranger && sudo make install) \
+      && rm -rf /tmp/ranger
+  fi
+
+  # pyenv
+  bin_exists pyenv || git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+
+  # nvm
+  bin_exists nvm || git clone https://github.com/creationix/nvm.git ~/.nvm
+
+  # rbenv & ruby-build
+  if ! bin_exists rbenv; then
+    git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+  fi
+
+  # copyq
+  if is_arch; then
+    ins_wrap copyq
+  fi
+
+  # clipper
+  if [ -n $DISPLAY ]; then
+    while :; do
+      read -p 'Graphic session detected. Do you want to install clipper(go will also be installed)[Y/n]' yn
+      case $yn in
+        [Yy]*|"" ) install_clipper=YES; break;;
+        [Nn]* ) install_clipper=NO; break;;
+        * ) echo "Please answer y or n.";;
+      esac
+    done
+  fi
+  if [ ${install_clipper} = YES ]; then
+    if is_arch; then
+      ins_wrap go
+    else
+      ins_wrap go golang-go
+    fi
+    which clipper > /dev/null || go get github.com/wincent/clipper
+  fi
+
+  # pdftotext
+  ins_wrap pdftotext poppler-utils
+fi
+
+# Git repos
+
+unset yn
+if [ -f $HOME/.ssh/github_rsa ]; then
+  while :; do
+    read -p 'SSH key for GitHub detected, clone personal repos with SSH url?[Y/n]' yn
+    case $yn in
+      [Yy]*|"" ) use_ssh_url=YES; break;;
+      [Nn]* ) use_ssh_url=NO; break;;
+      * ) echo "Please answer y or n.";;
+    esac
+  done
+fi
+
+if [ ${use_ssh_url} = YES ]; then
+  git_repo_url_prefix="git@github.com:"
+else
+  git_repo_url_prefix="https://github.com/"
+fi
+
+# fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
+
+# Ranger icon support
+git clone --depth 1 https://github.com/alexanderjeurissen/ranger_devicons /tmp/ranger_devicons \
+    && (cd /tmp/ranger_devicons && make install) && rm -rf /tmp/ranger_devicons
+
+# Oh-my-zsh
+git clone --recurse-submodules ${git_repo_url_prefix}15cm/oh-my-zsh.git ~/.oh-my-zsh
+if [[ ${use_ssh_url} == YES ]]; then
+  # Change submodule urls to SSH ones
+  sed -i 's|\(url = \)https://.*github.com/\(15cm.*\)|\1git@github.com:\2|' ~/.oh-my-zsh/.git/config
+fi
+
+# Spacemacs
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d && (cd ~/.emacs.d && git checkout develop)
+
+# My spacemacs config
+git clone ${git_repo_url_prefix}15cm/spacemacs-config.git ~/.spacemacs.d
+
+# z
+git clone https://github.com/rupa/z.git ~/.z
+
+# vim colors
+wget -nc -P ~/.vim/colors https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+wget -nc -P ~/.vim/colors https://github.com/chriskempson/tomorrow-theme/raw/master/vim/colors/Tomorrow-Night.vim
+
+# Karabiner
+git clone ${git_repo_url_prefix}15cm/karabiner-config.git ~/.config/karabiner
+{{- if eq .chezmoi.os "darwin"}}
+{{- else}}
+{{- end}}
+
+# tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+chsh -s "$(command -v zsh)"
