@@ -1,0 +1,10 @@
+[Unit]
+Description=Disable USB wakeup triggers in /proc/acpi/wakeup
+
+[Service]
+Type=oneshot
+ExecStart=/home/sinkerine/.config/scripts/systemd/disable_acpi_wakeup.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

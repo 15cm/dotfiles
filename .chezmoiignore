@@ -8,7 +8,7 @@ README.md
 .config/redshift/
 .config/scripts/firefox/
 .config/scripts/i3/
-.config/systemd/user/
+.config/systemd/
 .config/compton.conf
 .x/
 .Xresources
