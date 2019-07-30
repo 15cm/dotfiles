@@ -8,8 +8,12 @@ fi
 # --------------------- PATH ---------------------
 
 export PATH="/usr/local/bin:$PATH:$HOME/local/bin"
-# Path for go
+
+# Go
 export PATH="$PATH:$HOME/go/bin"
+
+# Cargo
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Android Studio
 export ANDROID_HOME=$HOME/AppData/Android/sdk
