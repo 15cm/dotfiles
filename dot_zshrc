@@ -182,7 +182,7 @@ if which pyenv > /dev/null; then eval "$(pyenv init - --no-rehash)"; fi
 # pyenv-virtualenv
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-# nvm
+# nvm(lazy load)
 export NVM_DIR="$HOME/.nvm"
 function load_nvm() {
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

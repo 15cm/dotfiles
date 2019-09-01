@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-import requests
 import os
+
+import requests
 
 #https://github.com/15cm/gitignore
 
@@ -13,7 +14,8 @@ ignore_src_names = [
     'Vim',
     'Tags',
     'Windows',
-    'Emacs'
+    'Emacs',
+    'Python'
 ]
 
 github_link_template = 'https://raw.githubusercontent.com/15cm/gitignore/master/Global/{0}.gitignore'
@@ -27,4 +29,3 @@ with open(local_ignore_file) as f:
 
 with open(ignore_file, 'w') as f:
     f.writelines(map(lambda x: x + '\n', local_ignore_lines + remote_ignore_texts))
-

@@ -20,8 +20,16 @@
 	        "width": "auto"
           },
           {
+            "function": "powerline.segments.common.env.user",
+            "priority": 10
+          },
+          {
+            "function": "powerline.segments.common.env.virtualenv",
+            "priority": 10
+          },
+          {
             "function": "powerline_gitstatus.gitstatus",
-            "priority": 40
+            "priority": 10
           }
 	    ]
       }
