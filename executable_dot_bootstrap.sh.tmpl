@@ -37,6 +37,7 @@ install_common_pac() {
   ins_wrap highlight
   ins_wrap python3
   ins_wrap parallel
+  ins_wrap pipenv
 }
 
 fetch_url_github_latest_release_binary() {
@@ -78,6 +79,7 @@ if is_osx; then
   which pip > /dev/null || curl https://bootstrap.pypa.io/get-pip.py | $BREW_PYTHON
   $BREW_PIP install powerline-status
   $BREW_PIP install powerline-gitstatus
+  $BREW_PIP install powerline-pyenv
 
   # exa
   ins_wrap exa
@@ -163,6 +165,7 @@ else
   [[ -f $SYS_PIP ]] || $pacman_install python-pip
   sudo $SYS_PIP install powerline-status
   sudo $SYS_PIP install powerline-gitstatus
+  sudo $SYS_PIP install powerline-pyenv
 
   # exa
   if is_arch; then

@@ -1,66 +1,68 @@
 {
-  "segments": {
-    "above": [
-      {
-	    "left": [
-	      {
-		    "function": "powerline.segments.shell.cwd",
-            "args": {
-              "dir_limit_depth": 3
+    "segments": {
+        "right": [
+            {
+                "priority": 10,
+                "function": "powerline.segments.shell.last_status"
             },
-		    "priority": 10
-	      }
-	    ],
-	    "right": [
-          {
-	        "type": "string",
-	        "highlight_groups": ["background"],
-	        "draw_soft_divider": false,
-	        "draw_hard_divider": false,
-	        "width": "auto"
-          },
-          {
-            "function": "powerline.segments.common.env.user",
-            "priority": 10
-          },
-          {
-            "function": "powerline.segments.common.env.virtualenv",
-            "priority": 10
-          },
-          {
-            "function": "powerline_gitstatus.gitstatus",
-            "priority": 10
-          }
-	    ]
-      }
-    ],
-    "left": [
-      {
-        "function": "powerline.segments.shell.mode",
-        "args": {
-          "override": {
-            "vicmd": "C",
-            "viins": "I"
-          }
-        }
-      }
-	],
-	"right": [
-	  {
-		"function": "powerline.segments.shell.last_status",
-		"priority": 10
-	  },
-      {
-		"function": "powerline.segments.shell.jobnum",
-		"priority": 20
-	  },
-      {
-        "function": "powerline.segments.common.time.date",
-        "args": {
-          "istime": true,
-          "format": "%H:%M:%S"
-        }
-      }
-	]
-  }
+            {
+                "priority": 20,
+                "function": "powerline.segments.shell.jobnum"
+            },
+            {
+                "args": {
+                    "format": "%H:%M:%S",
+                    "istime": true
+                },
+                "function": "powerline.segments.common.time.date"
+            }
+        ],
+        "left": [
+            {
+                "args": {
+                    "override": {
+                        "viins": "I",
+                        "vicmd": "C"
+                    }
+                },
+                "function": "powerline.segments.shell.mode"
+            }
+        ],
+        "above": [
+            {
+                "right": [
+                    {
+                        "width": "auto",
+                        "draw_hard_divider": false,
+                        "draw_soft_divider": false,
+                        "highlight_groups": [
+                            "background"
+                        ],
+                        "type": "string"
+                    },
+                    {
+                        "priority": 20,
+                        "function": "powerline_pyenv.pyenv"
+                    },
+                    {
+                        "priority": 10,
+                        "function": "powerline_gitstatus.gitstatus"
+                    }
+                ],
+                "left": [
+                    {
+                        "priority": 10,
+                        "function": "powerline.segments.common.env.user"
+                    },
+                    {
+                        "priority": 10,
+                        "args": {
+                            "dir_limit_depth": 3
+                        },
+                        "function": "powerline.segments.shell.cwd"
+                    }
+                ]
+            }
+        ]
+    }
 }

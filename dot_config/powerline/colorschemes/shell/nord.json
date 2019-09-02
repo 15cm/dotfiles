@@ -1,84 +1,88 @@
 {
-    "name": "Nord theme for shell",
-    "groups": {
-        "mode": {
-            "fg": "darkestgreen",
-            "bg": "brightgreen",
-            "attrs": [
-                "bold"
-            ]
-        },
-        "vcs:clean": {
-            "fg": "white",
-            "bg": "darkgreen",
-            "attrs": []
-        },
-        "gitstatus": "vcs:clean",
-        "gitstatus_branch": "vcs:clean",
-        "gitstatus_branch_clean": "vcs:clean",
-        "gitstatus_branch_dirty": "warning:regular",
-        "gitstatus_branch_detached": {
-            "fg": "mediumpurple",
-            "bg": "solarized:red",
-            "attrs": []
-        },
-        "gitstatus_tag": {
-            "fg": "darkcyan",
-            "bg": "gray2",
-            "attrs": []
-        },
-        "gitstatus_behind": {
-            "fg": "solarized:base3",
-            "bg": "solarized:orange",
-            "attrs": []
-        },
-        "gitstatus_ahead": {
-            "fg": "solarized:base3",
-            "bg": "green",
-            "attrs": []
-        },
-        "gitstatus_staged": {
-            "fg": "solarized:base2",
-            "bg": "lightyellowgreen",
-            "attrs": []
-        },
-        "gitstatus_unmerged": {
-            "fg": "brightred",
-            "bg": "gray2",
-            "attrs": []
-        },
-        "gitstatus_changed": {
-            "fg": "orangered",
-            "bg": "gray0",
-            "attrs": []
-        },
-        "gitstatus_untracked": {
-            "fg": "brightestorange",
-            "bg": "gray0",
-            "attrs": []
-        },
-        "gitstatus_stashed": {
-            "fg": "darkblue",
-            "bg": "gray2",
-            "attrs": []
-        },
-        "gitstatus:divider": {
-            "fg": "gray8",
-            "bg": "gray2",
-            "attrs": []
-        }
-    },
     "mode_translations": {
         "vicmd": {
             "groups": {
                 "mode": {
-                    "fg": "gray9",
-                    "bg": "steelblue",
                     "attrs": [
                         "bold"
-                    ]
+                    ],
+                    "bg": "steelblue",
+                    "fg": "gray9"
                 }
             }
         }
-    }
+    },
+    "groups": {
+        "gitstatus:divider": {
+            "attrs": [],
+            "bg": "gray2",
+            "fg": "gray8"
+        },
+        "gitstatus_stashed": {
+            "attrs": [],
+            "bg": "gray2",
+            "fg": "darkblue"
+        },
+        "gitstatus_untracked": {
+            "attrs": [],
+            "bg": "gray0",
+            "fg": "brightestorange"
+        },
+        "gitstatus_changed": {
+            "attrs": [],
+            "bg": "gray0",
+            "fg": "orangered"
+        },
+        "gitstatus_unmerged": {
+            "attrs": [],
+            "bg": "gray2",
+            "fg": "brightred"
+        },
+        "gitstatus_staged": {
+            "attrs": [],
+            "bg": "lightyellowgreen",
+            "fg": "solarized:base2"
+        },
+        "gitstatus_ahead": {
+            "attrs": [],
+            "bg": "green",
+            "fg": "solarized:base3"
+        },
+        "gitstatus_behind": {
+            "attrs": [],
+            "bg": "solarized:orange",
+            "fg": "solarized:base3"
+        },
+        "gitstatus_tag": {
+            "attrs": [],
+            "bg": "gray2",
+            "fg": "darkcyan"
+        },
+        "gitstatus_branch_detached": {
+            "attrs": [],
+            "bg": "red",
+            "fg": "mediumpurple"
+        },
+        "gitstatus_branch_dirty": "warning:regular",
+        "gitstatus_branch_clean": "vcs:clean",
+        "gitstatus_branch": "vcs:clean",
+        "gitstatus": "vcs:clean",
+        "pyenv:version": {
+            "bg": "gray1",
+            "fg": "green"
+        },
+        "vcs:clean": {
+            "attrs": [],
+            "bg": "darkgreen",
+            "fg": "white"
+        },
+        "mode": {
+            "attrs": [
+                "bold"
+            ],
+            "bg": "brightgreen",
+            "fg": "darkestgreen"
+        }
+    },
+    "name": "Nord theme for shell"
 }
