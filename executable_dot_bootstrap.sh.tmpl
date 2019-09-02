@@ -82,9 +82,6 @@ if is_osx; then
   # exa
   ins_wrap exa
 
-  # pyenv
-  ins_wrap pyenv
-
   # rbenv
   ins_wrap rbenv
 
@@ -195,8 +192,6 @@ else
     fi
   fi
 
-  # pyenv
-  bin_exists pyenv || git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 
   # nvm
   bin_exists nvm || git clone https://github.com/creationix/nvm.git ~/.nvm
@@ -256,12 +251,24 @@ else
   git_repo_url_prefix="https://github.com/"
 fi
 
+# pyenv
+if ! bin_exists pyenv; then
+  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+  git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+  git clone git://github.com/pyenv/pyenv-pip-migrate.git ~/.pyenv/plugins/pyenv-pip-migrate
+fi
+
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 # Ranger icon support
 git clone --depth 1 https://github.com/alexanderjeurissen/ranger_devicons /tmp/ranger_devicons \
     && (cd /tmp/ranger_devicons && make install) && rm -rf /tmp/ranger_devicons
+# pyenv
+if ! bin_exists pyenv; then
+  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+fi
+
 
 # Oh-my-zsh
 git clone --recurse-submodules ${git_repo_url_prefix}15cm/oh-my-zsh.git ~/.oh-my-zsh
