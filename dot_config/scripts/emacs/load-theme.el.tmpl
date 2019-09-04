@@ -2,8 +2,9 @@
   (disable-theme spacemacs--cur-theme))
 {{- if eq .global.theme "light"}}
 (spacemacs/load-theme 'solarized-light)
-(custom-set-variables '(frame-background-mode 'light))
+(setq frame-background-mode 'light)
 {{- else}}
 (spacemacs/load-theme 'sanityinc-tomorrow-night)
-(custom-set-variables '(frame-background-mode 'dark))
+(setq frame-background-mode 'dark)
 {{- end}}
+(mapc 'frame-set-background-mode (frame-list))
