@@ -24,9 +24,14 @@ fi
 # Apply `chezmoi` config file
 chezmoi apply
 
-# Restart services
+# Reload
+
 # i3
-cmd_exists i3-msg && i3-msg restart &
+# Reload i3bar
+cmd_exists i3-msg && i3-msg reload &
+
+# Restart i3status
+killall i3bar && i3bar --bar_id=bar-1 2>&1 > /dev/null 2>&1 &
 
 # Powerline
 cmd_exists powerline-daemon && powerline-daemon --replace \
