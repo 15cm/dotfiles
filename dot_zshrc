@@ -56,8 +56,6 @@ function lazy_load_clean() {
 
 # --------------------- ENV ---------------------
 export EDITOR=$HOME/.config/scripts/misc/exec-editor.sh
-export _Z_DATA="$HOME/.z/.z"
-. ~/.z/z.sh
 
 # GPG Fix
 export GPG_TTY=$(tty)
@@ -66,12 +64,11 @@ export GPG_TTY=$(tty)
 export TLDR_COLOR_BLANK="blue"
 export TLDR_COLOR_DESCRIPTION="green"
 export TLDR_COLOR_PARAMETER="blue"
-
 # _____________________ ENV _____________________
 
 # --------------------- Plugins ---------------------
 # Auto suggestions
-ZSH_AUTOSUGGEST_USE_ASYNC=true
+export ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 # Alias tips
 export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="_ ll vi"
@@ -79,12 +76,12 @@ export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="_ ll vi"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting cd-gitroot zce yadm docker alias-tips)
 # _____________________ Plugins _____________________
 
+# --------------------- Completions ---------------------
+fpath+=$HOME/.zfunc
+# _____________________ Completions _____________________
+
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-
-# --------------------- Completions ---------------------
-fpath=($HOME/.zsh-completions $fpath)
-# _____________________ Completions _____________________
 
 # --------------------- Key map ---------------------
 export KEYTIMEOUT=5
@@ -175,15 +172,11 @@ bindkey -s '^[u' 'ranger-cd^m'
 # --------------------- Version Management ---------------------
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 if which pyenv > /dev/null; then eval "$(pyenv init - --no-rehash)"; fi
 
 # pyenv-virtualenv
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-# nvm(lazy load)
-export NVM_DIR="$HOME/.nvm"
 function load_nvm() {
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 }
@@ -194,22 +187,20 @@ if [ -z $INSIDE_EMACS ]; then
 else
   load_nvm
 fi
-
-# [ -z "$INSIDE_EMACS" ] || (load_nvm; export NVM)
+lazy_load load_nodenv nodenv npm node hexo
 
 # jenv(lazy load)
-export PATH="$HOME/.jenv/bin:$PATH"
-# if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 function load_jenv() {
   if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 }
+
 lazy_load load_jenv jenv java javac
 
-# rbenv(lazy load)
-export PATH="$HOME/.rbenv/bin:$PATH"
+# rbenv
 function load_rbenv() {
   if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 }
+
 lazy_load load_rbenv rbenv ruby gem pry
 
 # direnv
@@ -217,7 +208,6 @@ function load_direnv() {
   if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 }
 lazy_load load_direnv direnv
-
 # _____________________ Version Management _____________________
 
 # --------------------- exa ---------------------
@@ -240,6 +230,12 @@ else
   _tree_cmd="tree -C"
 fi
 # _____________________ exa _____________________
+
+# --------------------- z ---------------------
+export _Z_DATA="$HOME/.z/.z"
+. ~/.z/z.sh
+# _____________________ z _____________________
+
 
 # --------------------- fzf ---------------------
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
