@@ -1,3 +1,6 @@
+# Start a non-login shell
+set -g default-command "${SHELL}"
+
 # Copy
 # bind-key syntax changed in 2.4
 if-shell -b '[ "$(echo "$TMUX_VERSION < 2.4" | bc)" = 1 ]' \
