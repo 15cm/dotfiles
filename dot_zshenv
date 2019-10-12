@@ -25,7 +25,7 @@ export PATH=$PATH:$ANDROID_HOME/tools
 
 # --------------------- Version Management ---------------------
 # PATH for symbolic links to binaries in envs
-export PATH="$HOME/.envs/bin:$PATH"
+export PATH="$PATH:$HOME/.envs/bin"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
