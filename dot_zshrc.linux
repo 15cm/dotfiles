@@ -20,11 +20,14 @@ export PATH="$PATH:$HOME/.local/bin"
 # Alacritty hdpi
 export WINIT_HIDPI_FACTOR=2.0
 
-# DE
+# GTK
 export GDK_SCALE=2
 
 # Plasma widget hdpi
 export PLASMA_USE_QT_SCALING=1
+
+# QT
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 # _____________________ Env _____________________
 

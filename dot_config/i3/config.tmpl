@@ -172,6 +172,7 @@ mode "launcher" {
      bindsym r exec rambox; mode "default"
      bindsym c exec chromium; mode "default"
      bindsym l exec telegram-desktop; mode "default"
+     bindsym m exec clementine; mode "default"
      bindsym Escape mode "default"
 }
 
@@ -288,29 +289,7 @@ bar {
 }
 
 # Autostart applications
-exec --no-startup-id copyq
-exec --no-startup-id guake
-exec --no-startup-id goldendict
-exec --no-startup-id keepassxc
-exec --no-startup-id syncthing-gtk
-
-# Applet
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nm-applet
-exec --no-startup-id blueman-applet
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-exec --no-startup-id redshift-gtk
-exec --no-startup-id pasystray
-
-# Essentials
-exec --no-startup-id pulseaudio -k; exec --no-startup-id pulseaudio --start -D
-exec --no-startup-id fcitx
-exec --no-startup-id xautolock -time 300 -locker blurlock
-exec --no-startup-id autorandr -l default
-
-# Starting things with i3
-exec --no-startup-id sleep 3 && systemctl --user start xsession.target
+exec --no-startup-id ~/.config/scripts/i3/init.sh
 
 # Border Colors
 # class                 border  backgr. text    indicator child_border
