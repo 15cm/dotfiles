@@ -160,19 +160,19 @@ bindsym $mod+z exec "$HOME/go/bin/chezmoi apply"
 bindsym $mod+e exec "$HOME/.emacs_anywhere/bin/run"
 bindsym $mod+Return exec alacritty
 bindsym $mod+i exec keepassxc
-bindsym $mod+u exec goldendict
+bindsym $mod+u exec dex /usr/share/applications/goldendict.desktop
 
 bindsym $mod+o mode "launcher"
 
 mode "launcher" {
      bindsym f exec firefox; mode "default"
      bindsym e exec $HOME/.config/scripts/i3/start-emacs-one-instance.sh; mode "default"
-     bindsym s exec "flameshot gui"; mode "default"
+     bindsym s exec "ksnip -r"; mode "default"
      bindsym d exec dolphin; mode "default"
      bindsym r exec rambox; mode "default"
      bindsym c exec chromium; mode "default"
      bindsym l exec telegram-desktop; mode "default"
-     bindsym m exec clementine; mode "default"
+     bindsym m exec dex /usr/share/applications/clementine.desktop; mode "default"
      bindsym Escape mode "default"
 }
 
