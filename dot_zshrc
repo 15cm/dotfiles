@@ -73,7 +73,7 @@ export ZSH_AUTOSUGGEST_USE_ASYNC=true
 # Alias tips
 export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="_ ll vi"
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting cd-gitroot zce yadm docker alias-tips)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting cd-gitroot zce docker alias-tips navi)
 # _____________________ Plugins _____________________
 
 # --------------------- Completions ---------------------
@@ -199,10 +199,7 @@ function load_rbenv() {
 lazy_load load_rbenv rbenv ruby gem pry
 
 # direnv
-function load_direnv() {
-  if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
-}
-lazy_load load_direnv direnv
+if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 # _____________________ Version Management _____________________
 
 # --------------------- exa ---------------------
