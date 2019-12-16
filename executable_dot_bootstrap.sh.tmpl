@@ -163,9 +163,9 @@ else
   SYS_PIP="/usr/bin/pip"
   [[ -f $SYS_PYTHON ]] || $pacman_install python
   [[ -f $SYS_PIP ]] || $pacman_install python-pip
-  sudo $SYS_PIP install powerline-status
-  sudo $SYS_PIP install powerline-gitstatus
-  sudo $SYS_PIP install powerline-pyenv
+  $SYS_PIP install --user powerline-status
+  $SYS_PIP install --user powerline-gitstatus
+  $SYS_PIP install --user powerline-pyenv
 
   # exa
   if is_arch; then
