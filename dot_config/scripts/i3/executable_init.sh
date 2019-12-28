@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Fix cursor size under QT Apps(see ~/.config/kcminputrc)
-kcminit
-
 # Keyboard settings: repeat_delay repeat_rate
 xset r rate 400 24
 
