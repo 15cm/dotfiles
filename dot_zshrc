@@ -212,10 +212,9 @@ export NAVI_PATH="$HOME/.navi:$ZSH_CUSTOM/plugins/navi/cheats"
 # --------------------- exa ---------------------
 if which exa > /dev/null; then
   _ls_cmd="exa --color always --group-directories-first --sort extension"
-  alias ls2="$_ls_cmd"
   alias ls="$_ls_cmd"
-  alias la="$_ls_cmd -al --git"
-  alias ll="$_ls_cmd -l --git"
+  alias la="$_ls_cmd -al --git --group --header"
+  alias ll="$_ls_cmd -l --git --group --header"
   alias l="$_ls_cmd -l --git"
   alias tree="$_ls_cmd --tree --level 2 -l --git"
   alias tree2="$_ls_cmd --tree"
