@@ -53,11 +53,6 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 # _____________________ Proxy _____________________
 
 # --------------------- ENV ---------------------
-# qt scaling
-export QT_QPA_PLATFORMTHEME="qt5ct"
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
-export QT_SCALE_FACTOR=1
-
 # locale
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

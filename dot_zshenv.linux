@@ -1,0 +1,9 @@
+export DISPLAY=:0
+
+# qt scaling
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_SCALE_FACTOR=1
+
+# Fix systemctl --user
+export XDG_RUNTIME_DIR=/run/user/`id -u`
