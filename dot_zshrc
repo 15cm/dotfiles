@@ -202,6 +202,13 @@ lazy_load load_rbenv rbenv ruby gem pry
 if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 # _____________________ Version Management _____________________
 
+# --------------------- navi ---------------------
+# navi
+export NAVI_PATH="$HOME/.navi:$ZSH_CUSTOM/plugins/navi/cheats"
+
+# _____________________ navi _____________________
+
+
 # --------------------- exa ---------------------
 if which exa > /dev/null; then
   _ls_cmd="exa --color always --group-directories-first --sort extension"
