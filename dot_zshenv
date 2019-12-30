@@ -6,7 +6,7 @@ else
 fi
 
 # --------------------- PATH ---------------------
-
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="/usr/local/bin:$PATH:$HOME/local/bin"
 
 # Go
