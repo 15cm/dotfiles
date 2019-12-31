@@ -7,20 +7,17 @@ fi
 
 backup_root_dir=$1
 user_home=/home/sinkerine
-backup_exec=$user_home/local/bin/rsync_tmbackup.sh
+backup_exec=/usr/local/bin/rsync_tmbackup.sh
+rsync_flags="--super -a --numeric-ids --hard-links --one-file-system --itemize-changes --times --perms --stats --human-readable"
 
 # backup pacman packages
 pacman -Qqe | grep -vx "$(pacman -Qqm)" > $user_home/.backup/pacman-packages
 pacman -Qqm > $user_home/.backup/pacman-packages-aur
 
-# run rsync time backup
-if mount | grep -q auto.nas; then
-  if [ $(id -u) = 0 ]; then
-   $backup_exec  --rsync-set-flags '-D --compress --numeric-ids --links --hard-links --one-file-system --itemize-changes --times --recursive --perms --stats --human-readable' /etc ${backup_root_dir}/etc $user_home/.time-backup-exclude-etc
-  else
-    sudo $backup_exec  --rsync-set-flags '-D --compress --numeric-ids --links --hard-links --one-file-system --itemize-changes --times --recursive --perms --stats --human-readable' /etc ${backup_root_dir}/etc $user_home/.time-backup-exclude-etc
-  fi
-  $backup_exec --rsync-set-flags '-D --compress --numeric-ids --links --hard-links --one-file-system --itemize-changes --times --recursive --perms --stats --human-readable' /home ${backup_root_dir}/home $user_home/.time-backup-exclude-home
-else
-  echo "NAS is not mounted"
+if [ $(id -u) -ne 0 ]; then
+  backup_exec="sudo ${backup_exec}"
 fi
+
+# run rsync time backup
+$backup_exec -i ~/.ssh/nas_rsa  --rsync-set-flags "${rsync_flags}" /etc ${backup_root_dir}/etc $user_home/.time-backup-exclude-etc
+$backup_exec -i ~/.ssh/nas_rsa --rsync-set-flags "${rsync_flags}" /home ${backup_root_dir}/home $user_home/.time-backup-exclude-home
