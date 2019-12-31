@@ -295,8 +295,8 @@ wget -nc -P ~/.vim/colors https://raw.githubusercontent.com/altercation/vim-colo
 wget -nc -P ~/.vim/colors https://github.com/chriskempson/tomorrow-theme/raw/master/vim/colors/Tomorrow-Night.vim
 
 # Karabiner
-git clone ${git_repo_url_prefix}15cm/karabiner-config.git ~/.config/karabiner
 {{- if eq .chezmoi.os "darwin"}}
+git clone ${git_repo_url_prefix}15cm/karabiner-config.git ~/.config/karabiner
 {{- else}}
 {{- end}}
 
