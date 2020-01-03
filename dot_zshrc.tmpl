@@ -379,7 +379,9 @@ alias prl="parallel"
 alias grep="grep --color=auto"
 alias rp="realpath"
 alias sudo="sudo "
+{{- if eq .chezmoi.hostname "kazuki"}}
 alias ssh="ssh -F ~/.ssh/interactive.conf"
+{{- end}}
 
 # Leetcode
 alias lc="leetcode"
