@@ -32,7 +32,6 @@ install_common_pac() {
   ins_wrap zsh
   ins_wrap jq
   ins_wrap rg ripgrep
-  ins_wrap ag the_silver_searcher
   ins_wrap bc
   ins_wrap highlight
   ins_wrap python3
@@ -62,6 +61,9 @@ if is_osx; then
 
   # Install common packages
   install_common_pac
+
+  # ag
+  ins_wrap ag the_silver_searcher
 
   # gpg
   brew install gpg
@@ -135,6 +137,13 @@ else
 
   # Install common packages
   install_common_pac
+
+  # ag
+  if is_arch; then
+    ins_wrap ag the_silver_searcher
+  else
+    ins_wrap ag silversearcher-ag
+  fi
 
   # netcat
   if is_arch; then
