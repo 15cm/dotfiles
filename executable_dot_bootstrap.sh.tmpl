@@ -303,13 +303,18 @@ git clone https://github.com/rupa/z.git ~/.z
 wget -nc -P ~/.vim/colors https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
 wget -nc -P ~/.vim/colors https://github.com/chriskempson/tomorrow-theme/raw/master/vim/colors/Tomorrow-Night.vim
 
-# Karabiner
+# tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 {{- if eq .chezmoi.os "darwin"}}
+# Karabiner
 git clone ${git_repo_url_prefix}15cm/karabiner-config.git ~/.config/karabiner
 {{- else}}
 {{- end}}
 
-# tpm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+{{- if eq .chezmoi.hostname "sachi" "amane"}}
+# yadm
+git clone https://github.com/15cm/yadm-zsh ~/.oh-my-zsh/custom/plugins/yadm
+{{- end}}
 
 chsh -s "$(command -v zsh)"
