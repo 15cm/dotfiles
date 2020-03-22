@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Keyboard settings: repeat_delay repeat_rate
-xset r rate 400 24
+xset r rate 450 24
 
 # Autostart applications
 copyq &
