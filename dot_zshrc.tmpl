@@ -201,7 +201,7 @@ function load_rbenv() {
   if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 }
 
-lazy_load load_rbenv rbenv ruby gem pry
+lazy_load load_rbenv rbenv ruby gem pry t
 
 # direnv
 if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
@@ -379,9 +379,6 @@ alias prl="parallel"
 alias grep="grep --color=auto"
 alias rp="realpath"
 alias sudo="sudo "
-{{- if eq .chezmoi.hostname "kazuki"}}
-alias ssh="ssh -F ~/.ssh/interactive.conf"
-{{- end}}
 
 # Leetcode
 alias lc="leetcode"
