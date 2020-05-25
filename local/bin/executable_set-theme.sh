@@ -9,8 +9,6 @@ if  [[ "$#" -ne 1 || "$1" != "light" && "$1" != "dark" ]]; then
   exit 1
 fi
 
-emacs_server_dir="/tmp/emacs$UID"
-
 theme=$1
 
 if [ $theme = "light" ]; then
@@ -38,9 +36,10 @@ cmd_exists powerline-daemon && powerline-daemon --replace \
   && cmd_exists tmux && tmux source "$HOME/.config/powerline/bindings/tmux/powerline.conf" &
 
 # Emacs
+emacs_server_socket_dir_globs=("/tmp/emacs/$UID/*" "/run/user/$UID/emacs/*")
 if cmd_exists emacsclient; then
-  for p in ${emacs_server_dir}/*; do
-    f=$(basename $p)
-    emacsclient -s $f -eun '(load "~/.config/scripts/emacs/load-theme.el")'
+  for path in ${emacs_server_socket_dir_globs[@]}; do
+      name=$(basename $path)
+    emacsclient -s $name -eun '(load "~/.config/scripts/emacs/load-theme.el")'
   done
 fi
