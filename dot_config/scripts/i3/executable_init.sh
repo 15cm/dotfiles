@@ -4,20 +4,19 @@
 xset r rate 450 24
 
 # Autostart applications
-copyq &
-guake &
-goldendict &
-keepassxc &
-syncthing-gtk &
+ps cax | grep -q copyq || copyq &
+ps cax | grep -q goldendict || goldendict &
+ps cax | grep -q keepassxc || keepassxc &
+ps cax | grep -q syncthing-gtk || syncthing-gtk &
 
 # Applet
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-nm-applet &
-blueman-applet &
-xfce4-power-manager &
-pamac-tray &
-redshift-gtk &
-pasystray &
+ps cax | grep -q polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+ps cax | grep -q nm-applet || nm-applet &
+ps cax | grep -q blueman-applet || blueman-applet &
+ps cax | grep -q xfce4-power-manager || xfce4-power-manager &
+ps cax | grep -q pamac-tray || pamac-tray &
+ps cax | grep -q redshift-gtk || redshift-gtk &
+ps cax | grep -q pasystray || pasystray &
 
 # Essentials
 pulseaudio -k; exec --no-startup-id pulseaudio --start -D

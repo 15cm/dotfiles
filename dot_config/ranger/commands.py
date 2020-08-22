@@ -7,11 +7,14 @@
 # A simple command for demonstration purposes follows.
 # -----------------------------------------------------------------------------
 
-from __future__ import (absolute_import, division, print_function)
+from __future__ import absolute_import, division, print_function
 
+import distutils.spawn
 # You can import any python module as needed.
 import os
-import distutils.spawn
+import os.path
+import subprocess
+from sys import platform
 
 # You always need to import ranger.api.commands here to get the Command class:
 from ranger.api.commands import Command
@@ -62,24 +65,26 @@ class my_edit(Command):
         # content of the current directory.
         return self._tab_directory_content()
 
-import subprocess
-import os.path
-from sys import platform
 
 # helpers
 is_osx = platform == 'darwin'
+
+
 def merge_two_dicts(x, y):
-    z = x.copy()   # start with x's keys and values
-    z.update(y)    # modifies z with y's keys and values & returns None
+    z = x.copy()  # start with x's keys and values
+    z.update(y)  # modifies z with y's keys and values & returns None
     return z
+
 
 def exec_exists(f):
     return True if distutils.spawn.find_executable(f) else False
+
 
 tree_cmd = 'tree -C'
 fd_default_cmd = 'fd -H --no-ignore-vcs'
 fzf_default_opt = "--height 40% -m --reverse --bind 'ctrl-d:page-down,ctrl-u:page-up,ctrl-k:kill-line,pgup:preview-page-up,pgdn:preview-page-down,alt-a:toggle-all' "
 fzf_default_cmd = "fzf {0}".format(fzf_default_opt)
+
 
 def send_to_fzf(self, command):
     fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
@@ -90,6 +95,7 @@ def send_to_fzf(self, command):
             self.fm.cd(fzf_file)
         else:
             self.fm.select_file(fzf_file)
+
 
 class fzf_select(Command):
     """
@@ -107,6 +113,7 @@ class fzf_select(Command):
                   "--preview '([ -f {} ] && (highlight -O ansi -l {} 2> /dev/null || cat {})) | head -200'"
         send_to_fzf(self, command)
 
+
 class fzf_cd_dir(Command):
     """
     :fzf_cd_dir
@@ -118,6 +125,7 @@ class fzf_cd_dir(Command):
         command = "{0} -t d | ".format(fd_default_cmd) + fzf_default_cmd + \
                   "--preview '([ -d {{}} ] && {0} {{}}) | head -200'".format(tree_cmd)
         send_to_fzf(self, command)
+
 
 class fzf_z(Command):
     """
@@ -131,6 +139,7 @@ class fzf_z(Command):
                  + '--tac --reverse --preview "{0} {{}} | head -200" --preview-window right:30%'.format(tree_cmd)
         send_to_fzf(self, command)
 
+
 class fzf_mdfind(Command):
     """
     :fzf_mdfind
@@ -139,9 +148,11 @@ class fzf_mdfind(Command):
     """
     def execute(self):
         global tree_cmd
-        command='mdfind "kind:folder" \
-        | fzf --tac --reverse --preview "{0} {{}} | head -200"  --preview-window right:30%'.format(tree_cmd)
+        command = 'mdfind "kind:folder" \
+        | fzf --tac --reverse --preview "{0} {{}} | head -200"  --preview-window right:30%'.format(
+            tree_cmd)
         send_to_fzf(self, command)
+
 
 class delete_files(Command):
     """
@@ -149,18 +160,20 @@ class delete_files(Command):
 
     Delete selected files
     """
-
     def execute(self):
         if is_osx or exec_exists('trash-put'):
-            paths = list(map(lambda f: f.path, self.fm.thistab.get_selection()))
+            paths = list(map(lambda f: f.path,
+                             self.fm.thistab.get_selection()))
             for p in paths:
                 if is_osx:
                     subprocess.check_output(["trash", p])
                 else:
                     subprocess.check_output(['trash-put', p])
-            self.fm.notify('trashed {0}'.format(' '.join(map(lambda p: '"{0}"'.format(p), paths))))
+            self.fm.notify('trashed {0}'.format(' '.join(
+                map(lambda p: '"{0}"'.format(p), paths))))
         else:
             self.fm.execute_console('delete')
+
 
 class open_files(Command):
     """
@@ -168,17 +181,21 @@ class open_files(Command):
 
     Open selected files(use 'open' on macOS, 'xdg-open' on Linux)
     """
-
     def execute(self):
-        files = self.fm.thistab.get_selection() if self.args[-1] != '--open-from-move-right' else [self.fm.thisfile]
+        files = self.fm.thistab.get_selection(
+        ) if self.args[-1] != '--open-from-move-right' else [self.fm.thisfile]
         open_command = 'open' if is_osx else 'xdg-open'
         for f in files:
             p = f.path
             self.fm.notify('open {0}'.format(p))
-            subprocess.check_output([open_command, p])
+            subprocess.Popen([open_command, p],
+                             stdout=subprocess.DEVNULL,
+                             stderr=subprocess.DEVNULL)
+
 
 shell_emacs_cmd = "emacsclient -s misc -t"
 shell_vim_cmd = "vim"
+
 
 class open_files_shell_emacs(Command):
     """
@@ -186,15 +203,16 @@ class open_files_shell_emacs(Command):
 
     Open selected files with shell Emacs
     """
-
     def execute(self):
         global shell_emacs_cmd
-        files = self.fm.thistab.get_selection() if self.args[-1] != '--open-from-move-right' else [self.fm.thisfile]
+        files = self.fm.thistab.get_selection(
+        ) if self.args[-1] != '--open-from-move-right' else [self.fm.thisfile]
         for f in files:
             p = f.path
             command = "shell {0} \"{1}\"".format(shell_emacs_cmd, p)
             self.fm.notify('open emacs: {0}'.format(p))
             self.fm.execute_console(command)
+
 
 class open_files_shell_emacs_tmux(Command):
     """
@@ -202,15 +220,17 @@ class open_files_shell_emacs_tmux(Command):
 
     Open selected files in tmux with shell Emacs
     """
-
     def execute(self):
         global shell_emacs_cmd
-        files = self.fm.thistab.get_selection() if self.args[-1] != '--open-from-move-right' else [self.fm.thisfile]
+        files = self.fm.thistab.get_selection(
+        ) if self.args[-1] != '--open-from-move-right' else [self.fm.thisfile]
         for f in files:
             p = f.path
-            command = "shell tmux splitw -v '{0} \"{1}\"'".format(shell_emacs_cmd, p)
+            command = "shell tmux splitw -v '{0} \"{1}\"'".format(
+                shell_emacs_cmd, p)
             self.fm.notify('open {0} with shell emacs tmux'.format(p))
             self.fm.execute_console(command)
+
 
 class open_files_shell_vim(Command):
     """
@@ -218,15 +238,16 @@ class open_files_shell_vim(Command):
 
     Open selected files with shell Vim
     """
-
     def execute(self):
         global shell_vim_cmd
-        files = self.fm.thistab.get_selection() if self.args[-1] != '--open-from-move-right' else [self.fm.thisfile]
+        files = self.fm.thistab.get_selection(
+        ) if self.args[-1] != '--open-from-move-right' else [self.fm.thisfile]
         for f in files:
             p = f.path
             command = "shell {0} \"{1}\"".format(shell_vim_cmd, p)
             self.fm.notify('open vim: {0}'.format(p))
             self.fm.execute_console(command)
+
 
 class open_files_shell_vim_tmux(Command):
     """
@@ -234,30 +255,33 @@ class open_files_shell_vim_tmux(Command):
 
     Open selected files in tmux with shell Vim
     """
-
     def execute(self):
         global shell_vim_cmd
-        files = self.fm.thistab.get_selection() if self.args[-1] != '--open-from-move-right' else [self.fm.thisfile]
+        files = self.fm.thistab.get_selection(
+        ) if self.args[-1] != '--open-from-move-right' else [self.fm.thisfile]
         for f in files:
             p = f.path
-            command = "shell tmux splitw -v '{0} \"{1}\"'".format(shell_vim_cmd, p)
+            command = "shell tmux splitw -v '{0} \"{1}\"'".format(
+                shell_vim_cmd, p)
             self.fm.notify('open {0} with shell vim tmux'.format(p))
             self.fm.execute_console(command)
 
+
 open_option_keymap_general = {
     'o': 'open_files',
-        'O': 'open_files_file_browser',
-        'e': 'open_files_shell_emacs_tmux',
-        'E': 'open_files_shell_emacs',
-        'v': 'open_files_shell_vim_tmux',
-        'V': 'open_files_shell_vim',
-        'q': 'cancel'
-    }
-
-open_option_keymap_mac = {
+    'O': 'open_files_file_browser',
+    'e': 'open_files_shell_emacs_tmux',
+    'E': 'open_files_shell_emacs',
+    'v': 'open_files_shell_vim_tmux',
+    'V': 'open_files_shell_vim',
+    'q': 'cancel'
 }
 
-open_option_keymap = merge_two_dicts(open_option_keymap_general, open_option_keymap_mac if is_osx else {})
+open_option_keymap_mac = {}
+
+open_option_keymap = merge_two_dicts(open_option_keymap_general,
+                                     open_option_keymap_mac if is_osx else {})
+
 
 class draw_command_open_option_keymap(Command):
     """
@@ -266,8 +290,12 @@ class draw_command_open_option_keymap(Command):
     def execute(self):
         global open_option_keymap
 
-        keymap = ['{0} | {1}'.format(k, v.replace('open_files_', '')) for (k, v) in open_option_keymap.items()]
+        keymap = [
+            '{0} | {1}'.format(k, v.replace('open_files_', ''))
+            for (k, v) in open_option_keymap.items()
+        ]
         self.fm.ui.browser.draw_info = keymap
+
 
 class open_files_with(Command):
     """
@@ -275,6 +303,7 @@ class open_files_with(Command):
     """
     def execute(self):
         global open_option_keymap
+
         def callback(answer):
             cmd = open_option_keymap[answer]
             if answer == 'q':
@@ -282,14 +311,14 @@ class open_files_with(Command):
             elif not cmd.startswith('open_files_'):
                 self.fm.execute_console(cmd)
             else:
-                self.fm.execute_console('{0} {1}'.format(open_option_keymap[answer], self.rest(1)))
+                self.fm.execute_console('{0} {1}'.format(
+                    open_option_keymap[answer], self.rest(1)))
             self.fm.ui.browser.draw_info = False
 
         keys = [k for k in open_option_keymap.keys()]
         self.fm.ui.console.ask('open_files_with: [{0}]'.format(''.join(keys)),
-            callback,
-            ['q', 'q'] + keys
-        )
+                               callback, ['q', 'q'] + keys)
+
 
 class my_move_right(Command):
     """
@@ -300,7 +329,10 @@ class my_move_right(Command):
         if f.is_directory:
             self.fm.move(right=1)
         else:
-            self.fm.execute_console('chain draw_command_open_option_keymap; open_files_with --open-from-move-right')
+            self.fm.execute_console(
+                'chain draw_command_open_option_keymap; open_files_with --open-from-move-right'
+            )
+
 
 class open_files_file_browser(Command):
     """
@@ -308,19 +340,30 @@ class open_files_file_browser(Command):
     Reveal selected files in file browser
     """
     def execute(self):
-        files = self.fm.thistab.get_selection() if self.arg(2) != '-h' else [self.fm.thisfile]
+        files = self.fm.thistab.get_selection() if self.arg(2) != '-h' else [
+            self.fm.thisfile
+        ]
         if is_osx:
             # open in finder
-            paths = ",".join(['"{0}" as POSIX file'.format(file.path) for file in files])
-            reveal_script = "tell application \"Finder\" to reveal {{{0}}}".format(paths)
+            paths = ",".join(
+                ['"{0}" as POSIX file'.format(file.path) for file in files])
+            reveal_script = "tell application \"Finder\" to reveal {{{0}}}".format(
+                paths)
             activate_script = "tell application \"Finder\" to set frontmost to true"
-            script = "osascript -e '{0}' -e '{1}'".format(reveal_script, activate_script)
+            script = "osascript -e '{0}' -e '{1}'".format(
+                reveal_script, activate_script)
             self.fm.notify(script)
-            subprocess.Popen(["osascript", "-e", reveal_script, "-e", activate_script], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.Popen(
+                ["osascript", "-e", reveal_script, "-e", activate_script],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL)
         else:
             # open in dolphin
             paths = [f.path for f in files]
-            subprocess.Popen(["dolphin", "--select"] + paths, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.Popen(["dolphin", "--select"] + paths,
+                             stdout=subprocess.DEVNULL,
+                             stderr=subprocess.DEVNULL)
+
 
 class shell_in_tmux(Command):
     """

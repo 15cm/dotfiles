@@ -13,6 +13,3 @@ _minted*/
 # C/C++
 .cquery_cached_index/
 .ccls-cache/
-
-# Direnv
-.envrc
