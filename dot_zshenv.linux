@@ -1,15 +1,1 @@
-export DISPLAY=:0
-
-# QT scaling
-export QT_QPA_PLATFORMTHEME="qt5ct"
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
-export QT_SCALE_FACTOR=1
-
-# GTK
-export GDK_SCALE=2
-
-# Fix systemctl --user
-export XDG_RUNTIME_DIR=/run/user/`id -u`
-
-# Alacritty hdpi
-export WINIT_HIDPI_FACTOR=2.0
+# Placeholder
