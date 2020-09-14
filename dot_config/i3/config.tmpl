@@ -144,12 +144,17 @@ bindsym $mod+v exec wmfocus
 # Chezmoi
 bindsym $mod+z exec "chezmoi apply"
 
+# Fcitx
+bindsym Mod4+Control+space exec --no-startup-id zsh -c "source ~/.config/powerline/bindings/zsh/powerline.zsh && fcitx5-remote -c"
+bindsym Mod4+Mod1+space exec --no-startup-id zsh -c "source ~/.config/powerline/bindings/zsh/powerline.zsh && fcitx5-remote -s rime"
+bindsym Mod4+Mod1+Control+space exec --no-startup-id zsh -c "source ~/.config/powerline/bindings/zsh/powerline.zsh && fcitx5-remote -s mozc"
+
 # Launcher
-bindsym $mod+e exec "$HOME/.emacs_anywhere/bin/run"
+bindsym $mod+e exec ~/.emacs_anywhere/bin/run
 bindsym $mod+Return exec alacritty
 bindsym $mod+i exec keepassxc
 bindsym $mod+u exec dex /usr/share/applications/goldendict.desktop
-bindsym $mod+y exec $HOME/.local/bin/i3-quickterm shell
+bindsym $mod+y exec ~/.local/bin/i3-quickterm shell
 
 bindsym $mod+o mode "launcher"
 
@@ -229,7 +234,7 @@ for_window [instance="^copyq$" class="^Copyq$"] border pixel 0, floating enable
 
 bar {
     id bar-1
-    font pango:DejaVu Sans Mono, FontAwesome 12
+    font pango:DejaVu Sans Mono, FontAwesome 10
 	i3bar_command i3bar
 	# status_command i3status
 	status_command i3status-rs ~/.config/i3/status.toml

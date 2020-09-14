@@ -17,7 +17,7 @@ ps cax | grep -q xfce4-power-manager || xfce4-power-manager &
 ps cax | grep -q pamac-tray || pamac-tray &
 ps cax | grep -q redshift-gtk || redshift-gtk &
 ps cax | grep -q pasystray || pasystray &
-ps cax | grep -q fcitx || fcitx &
+ps cax | grep -q fcitx5 || fcitx5 &
 
 # Essentials
 xautolock -time 300 -locker blurlock &
