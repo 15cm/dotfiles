@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Keyboard settings: repeat_delay repeat_rate
-xset r rate 450 24
-
 # Autostart applications
 ps cax | grep -q copyq || copyq &
 ps cax | grep -q goldendict || goldendict &
