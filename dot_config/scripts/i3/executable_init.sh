@@ -21,6 +21,3 @@ autorandr -l default &
 
 # Starting things with i3
 systemctl --user start xsession.target &
-
-# Keyboard settings: repeat_delay repeat_rate
-xset r rate 450 24
