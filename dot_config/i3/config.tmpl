@@ -54,7 +54,8 @@ bindsym $mod+semicolon split h
 bindsym $mod+apostrophe split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+f exec ~/.config/scripts/i3/i3_maximize.sh
+bindsym $mod+shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+a layout stacking
