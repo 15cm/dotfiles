@@ -189,6 +189,10 @@ handle_mime() {
             # pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}" -- "${FILE_PATH}" && exit 5
             exit 2;;
 
+        # Json
+        */json)
+          jq < "${FILE_PATH}";;
+
         # Image
         image/*)
             # Preview as text conversion
