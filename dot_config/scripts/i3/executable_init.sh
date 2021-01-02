@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 3
+
 # Autostart applications
 ps cax | grep -q copyq || copyq &
 ps cax | grep -q goldendict || goldendict &
