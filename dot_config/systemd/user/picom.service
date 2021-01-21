@@ -3,7 +3,7 @@ Description=Compositing manager
 
 [Service]
 Environment="DISPLAY=:0"
-ExecStart=/usr/bin/picom --experimental-backends
+ExecStart=/usr/bin/picom
 Restart=on-failure
 RestartSec=30
 
