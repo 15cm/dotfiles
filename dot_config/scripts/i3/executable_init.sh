@@ -23,3 +23,7 @@ autorandr -l default &
 
 # Starting things with i3
 systemctl --user start xsession.target &
+
+# X11
+xset r rate 350 22
+xset s off
