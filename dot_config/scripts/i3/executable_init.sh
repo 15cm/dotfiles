@@ -7,6 +7,7 @@ ps cax | grep -q copyq || copyq &
 ps cax | grep -q goldendict || goldendict &
 ps cax | grep -q keepassxc || keepassxc &
 ps cax | grep -q syncthing-gtk || syncthing-gtk &
+ps cax | grep -q anki || anki &
 
 # Applet
 ps cax | grep -q polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
