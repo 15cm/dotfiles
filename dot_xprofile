@@ -23,4 +23,4 @@ export QT_IM_MODULE=fcitx5
 export XMODIFIERS=@im=fcitx5
 
 # Keyboard settings: repeat_delay repeat_rate
-xset r rate 450 24
+xset r rate 350 22
