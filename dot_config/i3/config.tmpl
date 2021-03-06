@@ -55,8 +55,8 @@ bindsym $mod+semicolon split h
 bindsym $mod+apostrophe split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f exec ~/.config/scripts/i3/i3_maximize.sh
-bindsym $mod+shift+f fullscreen toggle
+# bindsym $mod+f exec ~/.config/scripts/i3/i3_maximize.sh
+bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+a layout stacking
@@ -231,6 +231,7 @@ for_window [class="Clementine"] floating disable;
 for_window [instance="^copyq$" class="^Copyq$"] border pixel 0, floating enable, move position center
 # You will need to replace Title depending on your l10n
 for_window [class="^Anki$"] floating enable, resize set 1600 600, move position center
+for_window [class="antimicrox"] floating disable;
 
 
 bar {
@@ -278,9 +279,6 @@ bar {
     }
 }
 
-# Autostart applications
-exec --no-startup-id ~/.config/scripts/i3/init.sh
-
 # Border Colors
 # class                 border  backgr. text    indicator child_border
 client.focused          #ffffff  #285577 #ffffff #2e9ef4  #00ff00
@@ -290,3 +288,6 @@ client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
+
+# Autostart applications
+exec --no-startup-id ~/.config/scripts/i3/init.sh
