@@ -36,7 +36,7 @@ cmd_exists powerline-daemon && powerline-daemon --replace \
   && cmd_exists tmux && tmux source "$HOME/.config/powerline/bindings/tmux/powerline.conf" &
 
 # Emacs
-emacs_server_socket_dir_globs=("/tmp/emacs/$UID/*" "/run/user/$UID/emacs/*")
+emacs_server_socket_dir_globs=("/tmp/emacs$UID/*" "/run/user/$UID/emacs/*")
 if cmd_exists emacsclient; then
   for path in ${emacs_server_socket_dir_globs[@]}; do
       name=$(basename $path)
