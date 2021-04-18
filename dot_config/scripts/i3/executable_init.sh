@@ -1,23 +1,29 @@
-#!/bin/bash
+#!/bin/zsh
 
-sleep 3
+sleep 5
+
+launch_if_not_exist () {
+  ps cax | grep -q $1 || eval "$2 &"
+}
+
+launch_app_if_not_exist () {
+  launch_if_not_exist $1 "dex /usr/share/applications/$1.desktop"
+}
+
+auto_start_on_boots=(
+  copyq
+  goldendict
+  keepassxc
+  syncthing-gtk
+  anki
+  redshift-gtk
+)
 
 # Autostart applications
-ps cax | grep -q copyq || copyq &
-ps cax | grep -q goldendict || goldendict &
-ps cax | grep -q keepassxc || keepassxc &
-ps cax | grep -q syncthing-gtk || syncthing-gtk &
-ps cax | grep -q anki || anki &
-
-# Applet
-ps cax | grep -q polkit-gnome-au || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-ps cax | grep -q nm-applet || nm-applet &
-ps cax | grep -q blueman-applet || blueman-applet &
-ps cax | grep -q xfce4-power-manager || xfce4-power-manager &
-ps cax | grep -q pamac-tray || pamac-tray &
-ps cax | grep -q redshift-gtk || redshift-gtk &
-ps cax | grep -q pasystray || pasystray &
-ps cax | grep -q fcitx5 || fcitx5 &
+for app in ${auto_start_on_boots}; do
+  launch_app_if_not_exist $app
+done
+launch_if_not_exist fcitx5 fcitx5
 
 # Essentials
 autorandr -l default &
