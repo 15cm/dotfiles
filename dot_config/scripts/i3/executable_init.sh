@@ -7,22 +7,16 @@ launch_if_not_exist () {
 }
 
 launch_app_if_not_exist () {
-  launch_if_not_exist $1 "dex /usr/share/applications/$1.desktop"
+  launch_if_not_exist $1 "dex $2"
 }
 
-auto_start_on_boots=(
-  copyq
-  goldendict
-  keepassxc
-  syncthing-gtk
-  anki
-  redshift-gtk
-)
-
 # Autostart applications
-for app in ${auto_start_on_boots}; do
-  launch_app_if_not_exist $app
-done
+launch_app_if_not_exist copyq /usr/share/applications/com.github.hluk.copyq.desktop
+launch_app_if_not_exist goldendict /usr/share/applications/goldendict.desktop
+launch_app_if_not_exist keepassxc /usr/share/applications/org.keepassxc.KeePassXC.desktop
+launch_app_if_not_exist syncthing-gtk /usr/share/applications/syncthing-gtk.desktop
+launch_app_if_not_exist anki /usr/share/applications/anki.desktop
+launch_app_if_not_exist redshift-gtk /usr/share/applications/redshift-gtk.desktop
 launch_if_not_exist fcitx5 fcitx5
 
 # Essentials
