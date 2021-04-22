@@ -37,6 +37,7 @@ install_common_pac() {
   ins_wrap python3
   ins_wrap parallel
   ins_wrap pipenv
+  ins_wrap htop
 }
 
 fetch_url_github_latest_release_binary() {
@@ -160,7 +161,7 @@ else
   # ranger(py3)
   if is_arch; then
     ins_wrap ranger
-  else
+  elif ! bin_exists ranger; then
     git clone --depth 1 https://github.com/ranger/ranger.git /tmp/ranger \
       && (cd /tmp/ranger && sudo PYTHON=$(which python3) make install) \
       && sudo rm -rf /tmp/ranger
@@ -234,6 +235,9 @@ else
 
   # pdftotext
   ins_wrap pdftotext poppler-utils
+
+  # Emacs
+  ins_wrap emacs
 fi
 
 # Git repos
