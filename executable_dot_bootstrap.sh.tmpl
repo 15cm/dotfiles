@@ -267,8 +267,7 @@ if ! bin_exists pyenv; then
 fi
 
 # Ranger icon support
-git clone --depth 1 https://github.com/alexanderjeurissen/ranger_devicons /tmp/ranger_devicons \
-    && (cd /tmp/ranger_devicons && make install) && rm -rf /tmp/ranger_devicons
+git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
 
 # Oh-my-zsh
 git clone --recurse-submodules ${git_repo_url_prefix}15cm/oh-my-zsh.git ~/.oh-my-zsh
