@@ -166,7 +166,6 @@ else
       && sudo rm -rf /tmp/ranger
   fi
 
-
   # pip & Powerline
   SYS_PYTHON="/usr/bin/python"
   SYS_PIP="/usr/bin/pip"
@@ -196,14 +195,8 @@ else
   if is_arch; then
     ins_wrap fd fd-rs
   else
-    if ! bin_exists fd; then
-      tmpf=$(mktemp)
-      wget $(fetch_url_github_latest_release_binary sharkdp/fd amd64.deb) -O ${tmpf} \
-        && sudo dpkg -i ${tmpf} \
-        && rm ${tmpf}
-    fi
+    ins_wrap fd fd-find
   fi
-
 
   # nvm
   bin_exists nvm || git clone https://github.com/creationix/nvm.git ~/.nvm
@@ -271,17 +264,9 @@ if ! bin_exists pyenv; then
   git clone https://github.com/pyenv/pyenv-which-ext.git ~/.pyenv/plugins/pyenv-which-ext
 fi
 
-# fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
-
 # Ranger icon support
 git clone --depth 1 https://github.com/alexanderjeurissen/ranger_devicons /tmp/ranger_devicons \
     && (cd /tmp/ranger_devicons && make install) && rm -rf /tmp/ranger_devicons
-# pyenv
-if ! bin_exists pyenv; then
-  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-fi
-
 
 # Oh-my-zsh
 git clone --recurse-submodules ${git_repo_url_prefix}15cm/oh-my-zsh.git ~/.oh-my-zsh
