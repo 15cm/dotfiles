@@ -134,7 +134,8 @@ else
   fi
 
   # Create folders
-  [ -d ~/local/log ] || mkdir -p ~/local/log
+  mkdir -p ~/local/log
+  mkdir -p ~/.z && touch ~/.z/.z
 
   # Install common packages
   install_common_pac
@@ -235,9 +236,6 @@ else
 
   # pdftotext
   ins_wrap pdftotext poppler-utils
-
-  # Emacs
-  ins_wrap emacs
 fi
 
 # Git repos
