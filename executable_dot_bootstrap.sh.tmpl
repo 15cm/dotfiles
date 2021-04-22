@@ -277,6 +277,9 @@ if [[ ${use_ssh_url} == YES ]]; then
   sed -i 's|\(url = \)https://.*github.com/\(15cm.*\)|\1git@github.com:\2|' ~/.oh-my-zsh/.git/config
 fi
 
+# fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
+
 # Spacemacs
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d && (cd ~/.emacs.d && git checkout develop)
 
