@@ -1,0 +1,10 @@
+[Unit]
+Description=Load Arandr config
+
+[Service]
+ExecStart=/usr/bin/arandr /home/sinkerine/.screenlayout/default.sh
+Type=oneshot
+
+[Install]
+WantedBy=xsession.target
+

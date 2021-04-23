@@ -1,10 +1,10 @@
 [Unit]
 Description=IMWheel
-Wants=display-manager.service
-After=display-manager.service
+Wants=graphical.target
+After=graphical.target
 
 [Service]
-Type=simple
+Type=oneshot
 Environment=XAUTHORITY=%h/.Xauthority
 ExecStart=/usr/bin/imwheel -d -b '4567'
 ExecStop=/usr/bin/pkill imwheel

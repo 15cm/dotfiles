@@ -1,12 +1,9 @@
 [Unit]
 Description=Set Wallpaper
-After=xorg.target
 
 [Service]
-Environment==DISPLAY=:0
 ExecStart=/usr/bin/nitrogen --restore
 Type=oneshot
-RemainAfterExit=no
 
 [Install]
 WantedBy=xsession.target

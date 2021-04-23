@@ -1,0 +1,11 @@
+[Unit]
+Description=Xset settings
+
+[Service]
+ExecStart=/usr/bin/xset r rate 350 22
+ExecStartPost=/usr/bin/xset s off
+Environment=XAUTHORITY=%h/.Xauthority
+Type=oneshot
+
+[Install]
+WantedBy=xsession.target

@@ -1,12 +1,9 @@
 [Unit]
-Description=Set Wallpaper
-After=xorg.target
+Description=Load nvidia settings
 
 [Service]
-Environment==DISPLAY=:0
 ExecStart=/usr/bin/nvidia-settings --load-config-only
 Type=oneshot
-RemainAfterExit=no
 
 [Install]
 WantedBy=xsession.target
