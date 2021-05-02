@@ -316,7 +316,7 @@ __fzf_z_cd_widget() {
   local dir=$(__fzf_z)
   cd "$dir"
   local ret=$?
-  zle fzf-redraw-prompt
+  zle reset-prompt
   typeset -f zle-line-init >/dev/null && zle zle-line-init
   return $ret
 }
