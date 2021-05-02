@@ -303,9 +303,7 @@ git clone ${git_repo_url_prefix}15cm/karabiner-config.git ~/.config/karabiner
 {{- else}}
 {{- end}}
 
-{{- if eq .chezmoi.hostname "sachi" "amane"}}
 # yadm
 git clone https://github.com/15cm/yadm-zsh ~/.oh-my-zsh/custom/plugins/yadm
-{{- end}}
 
 chsh -s "$(command -v zsh)"
