@@ -1,13 +1,12 @@
 export DISPLAY=:0
-export QT_QPA_PLATFORMTHEME="qt5ct"
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 export XCURSOR_PATH=/usr/share/icons
 
-# QT scaling
-export QT_QPA_PLATFORMTHEME="qt5ct"
+# Qt
+export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_SCREEN_SCALE_FACTORS=2
 
-# GTK
+# Gtk
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 
@@ -21,6 +20,3 @@ export INPUT_METHOD=fcitx5
 export GTK_IM_MODULE=fcitx5
 export QT_IM_MODULE=fcitx5
 export XMODIFIERS=@im=fcitx5
-
-# Keyboard settings: repeat_delay repeat_rate
-xset r rate 350 22

@@ -1,0 +1,8 @@
+[Unit]
+Description=Anik
+
+[Service]
+ExecStart=/usr/bin/anki
+
+[Install]
+WantedBy=xsession.target

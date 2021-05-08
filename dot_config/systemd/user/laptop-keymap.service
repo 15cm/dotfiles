@@ -2,8 +2,6 @@
 Description=Laptop keymap; Running service: xcape
 
 [Service]
-Environment="DISPLAY=:0"
-
 # Only key events without keyboard info can be listened to in X, so xcape effects globally
 # This service should not run when external keyboard is connected
 

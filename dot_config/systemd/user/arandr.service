@@ -2,7 +2,7 @@
 Description=Load Arandr config
 
 [Service]
-ExecStart=/usr/bin/arandr /home/sinkerine/.screenlayout/default.sh
+ExecStart=/usr/bin/arandr %h/.screenlayout/default.sh
 Type=oneshot
 
 [Install]

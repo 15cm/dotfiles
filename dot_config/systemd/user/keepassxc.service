@@ -1,0 +1,8 @@
+[Unit]
+Description=Keepassxc
+
+[Service]
+ExecStart=/usr/bin/keepassxc
+
+[Install]
+WantedBy=xsession.target

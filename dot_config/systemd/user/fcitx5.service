@@ -1,0 +1,8 @@
+[Unit]
+Description=Fcitx5
+
+[Service]
+ExecStart=/usr/bin/fcitx5
+
+[Install]
+WantedBy=xsession.target

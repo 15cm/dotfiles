@@ -1,0 +1,8 @@
+[Unit]
+Description=Copyq
+
+[Service]
+ExecStart=/usr/bin/copyq
+
+[Install]
+WantedBy=xsession.target

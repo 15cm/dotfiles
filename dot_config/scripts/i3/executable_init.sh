@@ -1,30 +1,24 @@
-#!/bin/zsh
+#!/bin/bash
 
-sleep 5
+# Sync with ~/.xprofile
+systemd_envs=(
+  DISPLAY
+  XAUTHORITY
+  QT_QPA_PLATFORMTHEME
+  GTK2_RC_FILES
+  XCURSOR_PATH
+  QT_SCREEN_SCALE_FACTORS
+  GDK_SCALE
+  GDK_DPI_SCALE
+  XDG_RUNTIME_DIR
+  WINIT_HIDPI_FACTOR
+  INPUT_METHOD
+  GTK_IM_MODULE
+  QT_IM_MODULE
+  XMODIFIERS
+)
 
-launch_if_not_exist () {
-  ps cax | grep -q $1 || eval "$2 &"
-}
-
-launch_app_if_not_exist () {
-  launch_if_not_exist $1 "dex $2"
-}
-
-# Autostart applications
-launch_app_if_not_exist copyq /usr/share/applications/com.github.hluk.copyq.desktop
-launch_app_if_not_exist goldendict /usr/share/applications/goldendict.desktop
-launch_app_if_not_exist keepassxc /usr/share/applications/org.keepassxc.KeePassXC.desktop
-launch_app_if_not_exist syncthing-gtk /usr/share/applications/syncthing-gtk.desktop
-launch_app_if_not_exist anki /usr/share/applications/anki.desktop
-launch_app_if_not_exist redshift-gtk /usr/share/applications/redshift-gtk.desktop
-launch_if_not_exist fcitx5 fcitx5
-
-# Essentials
-autorandr -l default &
+systemctl --user import-environment ${systemd_envs[@]}
 
 # Starting things with i3
-systemctl --user start xsession.target &
-
-# X11
-xset r rate 350 22
-xset s off
+systemctl --user start i3-session.target

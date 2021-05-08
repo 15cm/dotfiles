@@ -5,4 +5,4 @@ Description=Emacs Misc
 ExecStart=/usr/bin/emacs --fg-daemon=misc
 
 [Install]
-WantedBy=default.target
+WantedBy=xsession.target

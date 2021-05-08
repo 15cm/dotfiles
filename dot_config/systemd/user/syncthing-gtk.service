@@ -1,0 +1,8 @@
+[Unit]
+Description=syncthing-Gtk
+
+[Service]
+ExecStart=/usr/bin/syncthing-gtk
+
+[Install]
+WantedBy=xsession.target

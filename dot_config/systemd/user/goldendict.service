@@ -1,0 +1,8 @@
+[Unit]
+Description=Goldendict
+
+[Service]
+ExecStart=/usr/bin/goldendict
+
+[Install]
+WantedBy=xsession.target

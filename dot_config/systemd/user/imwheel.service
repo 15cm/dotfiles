@@ -1,13 +1,10 @@
 [Unit]
 Description=IMWheel
-Wants=graphical.target
-After=graphical.target
 
 [Service]
 Type=oneshot
-Environment=XAUTHORITY=%h/.Xauthority
 ExecStart=/usr/bin/imwheel -d -b '4567'
-ExecStop=/usr/bin/pkill imwheel
+ExecStop=/usr/bin/kill imwheel
 RemainAfterExit=yes
 
 [Install]

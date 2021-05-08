@@ -1,0 +1,8 @@
+[Unit]
+Description=Redshift-Gtk
+
+[Service]
+ExecStart=/usr/bin/redshift-gtk
+
+[Install]
+WantedBy=xsession.target
