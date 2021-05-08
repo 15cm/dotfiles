@@ -73,7 +73,7 @@ export ZSH_AUTOSUGGEST_USE_ASYNC=true
 # Alias tips
 export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="_ ll vi"
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting cd-gitroot zce docker alias-tips navi)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting cd-gitroot zce docker alias-tips)
 
 # Extra plugins for NAS
 {{- if eq .chezmoi.hostname "sachi" "amane"}}
@@ -207,13 +207,6 @@ lazy_load load_rbenv rbenv ruby gem pry t
 if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 # _____________________ Version Management _____________________
 
-# --------------------- navi ---------------------
-# navi
-export NAVI_PATH="$HOME/.navi:$ZSH_CUSTOM/plugins/navi/cheats"
-
-# _____________________ navi _____________________
-
-
 # --------------------- exa ---------------------
 if which exa > /dev/null; then
   _ls_cmd="exa --color always --group-directories-first --sort extension"
@@ -239,6 +232,9 @@ export _Z_DATA="$HOME/.z/.z"
 . ~/.z/z.sh
 # _____________________ z _____________________
 
+# Navi
+eval "$(navi widget zsh)"
+bindkey '^y' _navi_widget
 
 # --------------------- fzf ---------------------
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -350,7 +346,7 @@ bindkey '^x' fzf-cd-widget
 bindkey '^[x' __fzf_dir_widget
 
 export FZF_COMPLETION_TRIGGER=':'
-# _____________________ fzf and z _____________________
+# _____________________ fzf _____________________
 
 # --------------------- Config for different OS ---------------------
 if [[ $sys_name = "Darwin" ]]; then
