@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 2
+
 # Sync with ~/.xprofile
 systemd_envs=(
   DISPLAY
@@ -22,3 +24,4 @@ systemctl --user import-environment ${systemd_envs[@]}
 
 # Starting things with i3
 systemctl --user start i3-session.target
+systemctl --user start xsession.target

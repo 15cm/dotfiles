@@ -3,6 +3,7 @@ Description=Anik
 
 [Service]
 ExecStart=/usr/bin/anki
+TimeoutSec=10
 
 [Install]
 WantedBy=xsession.target

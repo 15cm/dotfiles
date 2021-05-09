@@ -2,10 +2,8 @@
 Description=IMWheel
 
 [Service]
-Type=oneshot
 ExecStart=/usr/bin/imwheel -d -b '4567'
 ExecStop=/usr/bin/kill imwheel
-RemainAfterExit=yes
 
 [Install]
 WantedBy=xsession.target

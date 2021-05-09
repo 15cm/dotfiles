@@ -1,7 +1,7 @@
 [Unit]
 Description=Sevices which requires X11
-Requires=i3-session.target
-After=i3-session.target suspend.target hibernate.target
+Requisite=i3-session.target
+After=i3-session.target
 
 [Install]
-WantedBy=default.target
+RequiredBy=i3-session.target
