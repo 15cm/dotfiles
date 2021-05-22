@@ -1,0 +1,8 @@
+[Unit]
+Description=Playerctld
+
+[Service]
+ExecStart=/usr/bin/playerctld
+
+[Install]
+WantedBy=xsession.target

@@ -169,11 +169,10 @@ mode "launcher" {
 
 # Media
 # Sony XM2 sends XF86AudioPause and XF86AudioPlay in turn when connected via bluetooth
-bindsym XF86AudioPause exec "clementine --play-pause"
-
-bindsym XF86AudioPlay exec "clementine --play-pause"
-bindsym XF86AudioNext exec "clementine --next"
-bindsym XF86AudioPrev exec "clementine --prev"
+bindsym XF86AudioPause exec "playerctl play-pause"
+bindsym XF86AudioPlay exec "playerctl play-pause"
+bindsym XF86AudioNext exec "playerctl next"
+bindsym XF86AudioPrev exec "playerctl previous"
 
 # Set shut down, restart and locking features
 bindsym $mod+Shift+z mode "$mode_system"
