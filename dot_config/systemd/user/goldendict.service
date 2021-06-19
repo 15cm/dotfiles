@@ -2,6 +2,7 @@
 Description=Goldendict
 
 [Service]
+Environment="QT_SCREEN_SCALE_FACTORS=1"
 ExecStart=/usr/bin/goldendict
 
 [Install]
