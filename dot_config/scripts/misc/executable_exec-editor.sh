@@ -1,3 +1,3 @@
 #!/bin/bash
 
-which emacsclient > /dev/null && emacsclient -s misc -t -a vim $*
+which emacsclient > /dev/null && emacsclient -s ~/local/run/emacs/misc -t -a vim $*

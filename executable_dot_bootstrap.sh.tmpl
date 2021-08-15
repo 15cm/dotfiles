@@ -302,4 +302,8 @@ git clone ${git_repo_url_prefix}15cm/karabiner-config.git ~/.config/karabiner
 # yadm
 git clone https://github.com/15cm/yadm-zsh ~/.oh-my-zsh/custom/plugins/yadm
 
+# Create folders
+mkdir -p ~/local/run/emacs
+chmod 700 ~/local/run/emacs
+
 chsh -s "$(command -v zsh)"
