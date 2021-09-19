@@ -36,7 +36,7 @@ cmd_exists powerline-daemon && powerline-daemon --replace \
   && cmd_exists tmux && tmux source "$HOME/.config/powerline/bindings/tmux/powerline.conf" &
 
 # Emacs
-emacs_server_socket_dir_globs=("/tmp/emacs$UID/*" "/run/user/$UID/emacs/*" "$HOME/local/run/emacs/*")
+emacs_server_socket_dir_globs=("$HOME/local/run/emacs/*")
 if cmd_exists emacsclient; then
   for path in ${emacs_server_socket_dir_globs[@]}; do
     emacsclient -s $path -eun '(load "~/.config/scripts/emacs/load-theme.el")'
