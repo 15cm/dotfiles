@@ -18,6 +18,8 @@ systemd_envs=(
   GTK_IM_MODULE
   QT_IM_MODULE
   XMODIFIERS
+  XDG_RUNTIME_DIR
+  DBUS_SESSION_BUS_ADDRESS
 )
 
 systemctl --user import-environment ${systemd_envs[@]}

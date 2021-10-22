@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 exec_exists() {
   pyenv which $1 > /dev/null 2>&1
