@@ -2,7 +2,8 @@
 Description=Emacs Misc
 
 [Service]
-ExecStart=/usr/bin/emacs --fg-daemon=misc
+Type=forking
+ExecStart=/usr/bin/emacs --daemon=misc
 
 [Install]
 WantedBy=xsession.target
