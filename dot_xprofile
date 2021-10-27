@@ -5,6 +5,7 @@ export XCURSOR_PATH=/usr/share/icons
 # Qt
 export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_SCREEN_SCALE_FACTORS=2
+export QT_AUTO_SCREEN_SCALE_FACTOR=1 
 
 # Gtk
 export GDK_SCALE=2
