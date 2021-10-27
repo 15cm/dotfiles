@@ -1,7 +1,2 @@
 [Unit]
 Description=Sevices which requires X11
-Requisite=i3-session.target
-After=i3-session.target
-
-[Install]
-RequiredBy=i3-session.target

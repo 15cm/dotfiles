@@ -1,5 +1,0 @@
-[Unit]
-Description=A hook target where we know i3 have been started
-
-[Install]
-WantedBy=suspend.target hibernate.target
