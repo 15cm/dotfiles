@@ -35,11 +35,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  {{- if ne .chezmoi.os "darwin"}}
-  decorations: none
-  {{- else}}
   decorations: full
-  {{- end}}
 
   dynamic_title: false
 
