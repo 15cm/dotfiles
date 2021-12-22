@@ -112,8 +112,8 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# hide/show windows
-bindsym $mod+comma [con_mark="^(?!to_hide).*$"] scratchpad show
+# hide/show windows in scratchpad
+bindsym $mod+comma [con_mark="misc"] scratchpad show
 bindsym $mod+period mark "misc", move scratchpad
 
 # Move focus between screens
@@ -159,7 +159,6 @@ mode "launcher" {
      bindsym c exec chromium; mode "default"
      bindsym l exec telegram-desktop; mode "default"
      bindsym m exec dex /usr/share/applications/org.clementine_player.Clementine.desktop; mode "default"
-     bindsym a exec ~/.config/scripts/anki/raise-anki.py; mode "default"
      bindsym Escape mode "default"
 }
 
@@ -224,15 +223,14 @@ for_window [class="GoldenDict"] floating enable, move position center, resize se
 for_window [class="Clementine"] floating disable;
 for_window [instance="^copyq$" class="^Copyq$"] border pixel 0, floating enable, move position center
 # You will need to replace Title depending on your l10n
-for_window [class="^Anki$"] floating enable, resize set 1600 600, move position center
+for_window [class="^Anki$"] floating enable, resize set 1600 600, move position center; mark anki
 for_window [class="antimicrox"] floating disable;
-
+for_window [title=".*i3-quickterm.*"] mark hidden;
 
 bar {
     id bar-1
     font pango:DejaVu Sans Mono, FontAwesome 10
 	i3bar_command i3bar
-	# status_command i3status
 	status_command i3status-rs ~/.config/i3/status.toml
 	position top
 
