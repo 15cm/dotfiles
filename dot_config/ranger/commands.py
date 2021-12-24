@@ -387,6 +387,9 @@ class open_files_file_browser(Command):
             if self.arg(2) != "-h"
             else [self.fm.thisfile]
         )
+        if len(files) == 0:
+            self.fm.notify("No files are selected")
+            return
         if is_osx:
             # open in finder
             paths = ",".join(
@@ -404,10 +407,10 @@ class open_files_file_browser(Command):
                 stderr=subprocess.DEVNULL,
             )
         else:
-            # open in dolphin
+            # open in nautilus
             paths = [f.path for f in files]
             subprocess.Popen(
-                ["dolphin", "--select"] + paths,
+                ["nautilus", "--select"] + paths,
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
             )
