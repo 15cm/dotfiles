@@ -14,3 +14,6 @@ noremap <leader>jl :action AceLineAction<CR>
 
 " Disable Hardware Beep Sound
 set vb
+
+set ignorecase
+set smartcase
