@@ -1,0 +1,12 @@
+[Unit]
+Description=OpenRGB
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/openrgb -p nolight
+
+{{- if eq .chezmoi.hostname "kazuki"}}
+
+[Install]
+WantedBy=xsession.target
+{{- end}}
