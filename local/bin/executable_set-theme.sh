@@ -11,13 +11,7 @@ fi
 
 theme=$1
 
-if [ $theme = "light" ]; then
-  perl -p -i -e 's/theme\s*=\s*"(dark|light)"/theme = "light"/' ~/.config/chezmoi/chezmoi.toml
-  cmd_exists guake && guake --change-palette 'Solarized Light'
-else
-  perl -p -i -e 's/theme\s*=\s*"(dark|light)"/theme = "dark"/' ~/.config/chezmoi/chezmoi.toml
-  cmd_exists guake && guake --change-palette 'Tomorrow Night'
-fi
+perl -p -i -e "s/theme\s*=\s*\"(dark|light)\"/theme = \"${theme}\"/" ~/.config/chezmoi/chezmoi.toml
 
 # Apply `chezmoi` config file
 chezmoi apply
@@ -26,7 +20,7 @@ chezmoi apply
 
 # i3
 # Reload i3bar
-cmd_exists i3-msg && i3-msg reload &
+cmd_exists i3-msg && i3-msg reload
 
 # Restart i3status
 cmd_exists i3bar && killall i3bar && i3bar --bar_id=bar-1 2>&1 > /dev/null 2>&1 &
