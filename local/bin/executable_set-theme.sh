@@ -16,22 +16,18 @@ perl -p -i -e "s/theme\s*=\s*\"(dark|light)\"/theme = \"${theme}\"/" ~/.config/c
 # Apply `chezmoi` config file
 chezmoi apply
 
-# Reload
+# Reload processes
 
 # i3
-# Reload i3bar
 cmd_exists i3-msg && i3-msg reload
 
-# Replace the existing terminal instance because i3 reload corrupts i3 marks that
-# i3-quickterm uses.
-cmd_exists i3-quickterm && i3-quickterm -i shell
-
-# Restart i3status
-cmd_exists i3bar && killall i3bar && i3bar --bar_id=bar-1 2>&1 > /dev/null 2>&1 &
+# i3status-rs
+# https://github.com/greshake/i3status-rust/pull/1131
+cmd_exists i3status-rs && killall -USR2 i3status-rs
 
 # Powerline
 cmd_exists powerline-daemon && powerline-daemon --replace \
-  && cmd_exists tmux && tmux source "$HOME/.config/powerline/bindings/tmux/powerline.conf" &
+  && cmd_exists tmux && tmux source "$HOME/.config/powerline/bindings/tmux/powerline.conf"
 
 # Emacs
 emacs_server_socket_dir_globs=("$HOME/local/run/emacs/*")
