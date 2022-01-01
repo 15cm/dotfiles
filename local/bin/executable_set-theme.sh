@@ -22,6 +22,10 @@ chezmoi apply
 # Reload i3bar
 cmd_exists i3-msg && i3-msg reload
 
+# Replace the existing terminal instance because i3 reload corrupts i3 marks that
+# i3-quickterm uses.
+cmd_exists i3-quickterm && i3-quickterm -i shell
+
 # Restart i3status
 cmd_exists i3bar && killall i3bar && i3bar --bar_id=bar-1 2>&1 > /dev/null 2>&1 &
 
