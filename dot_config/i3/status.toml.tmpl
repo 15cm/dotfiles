@@ -11,7 +11,7 @@ separator = ""
 
 [[block]]
 block = "net"
-device = "enp5s0"
+device = "{{ .hardware.ethernet_device }}"
 format = "{ip} {speed_down;K} {graph_down;K} {speed_up;K} {graph_up;K}"
 interval = 5
 
