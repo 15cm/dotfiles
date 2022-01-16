@@ -1,11 +1,14 @@
 #!/bin/bash
-# sudo, git, yadm should be installed manually first
+# sudo, git should be installed manually first
+
+set -e
+
 bin_exists() {
   command -v $1 >/dev/null 2>&1
 }
 
 is_arch () {
-  bin_exists pacman
+  grep -q 'Arch Linux' /etc/os-release
 }
 
 is_osx() {
@@ -36,9 +39,9 @@ install_common_pac() {
   ins_wrap highlight
   ins_wrap python3
   ins_wrap parallel
-  ins_wrap pipenv
   ins_wrap htop
   ins_wrap rsync
+  ins_wrap fzf
 }
 
 fetch_url_github_latest_release_binary() {
@@ -79,7 +82,7 @@ if is_osx; then
   # pip & Powerline
   BREW_PYTHON="/usr/local/bin/python3"
   BREW_PIP="/usr/local/bin/pip"
-  [[ -f $BREW_PYTHON ]] || $pacman_install python
+  [[ -f $BREW_PYTHON ]] || my_pacman_install python
   which pip > /dev/null || curl https://bootstrap.pypa.io/get-pip.py | $BREW_PYTHON
   $BREW_PIP install powerline-status
   $BREW_PIP install powerline-gitstatus
@@ -124,11 +127,13 @@ if is_osx; then
        alacritty
 else
   # Choose package manager according to distribution
-  # Update source
   if is_arch; then
-    bin_exists yay || (cd /tmp && git clone https://aur.archlinux.org/yay.git && makepkg -si)
-    pacman_install="sudo yay -S --noconfirm"
+    pacman_install="yay -S --noconfirm"
+    if ! bin_exists yay; then
+      (cd /tmp && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si)
+      rm -rf /tmp/yay
     yay -Sy
+    fi
   else
     pacman_install="sudo apt-get -y install"
     sudo apt-get update
@@ -274,9 +279,6 @@ if [[ ${use_ssh_url} == YES ]]; then
   sed -i 's|\(url = \)https://.*github.com/\(15cm.*\)|\1git@github.com:\2|' ~/.oh-my-zsh/.git/config
 fi
 
-# fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
-
 # Spacemacs
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d && (cd ~/.emacs.d && git checkout develop)
 
@@ -294,12 +296,12 @@ wget -nc -P ~/.vim/colors https://github.com/chriskempson/tomorrow-theme/raw/mas
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 {{- if eq .chezmoi.os "darwin"}}
-# Karabiner
+# Karabiner config
 git clone ${git_repo_url_prefix}15cm/karabiner-config.git ~/.config/karabiner
 {{- else}}
 {{- end}}
 
-# yadm
+# yadm zsh plugin
 git clone https://github.com/15cm/yadm-zsh ~/.oh-my-zsh/custom/plugins/yadm
 
 # Create folders
@@ -307,3 +309,4 @@ mkdir -p ~/local/run/emacs
 chmod 700 ~/local/run/emacs
 
 chsh -s "$(command -v zsh)"
+
