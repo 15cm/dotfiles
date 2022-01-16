@@ -94,9 +94,6 @@ if is_osx; then
   # rbenv
   ins_wrap rbenv
 
-  # fd
-  ins_wrap fd
-
   # ranger
   ins_wrap ranger
 
@@ -128,14 +125,14 @@ if is_osx; then
 else
   # Choose package manager according to distribution
   if is_arch; then
-    pacman_install="yay -S --noconfirm"
+    pacman_install="yay -S --needed --noconfirm"
     if ! bin_exists yay; then
       (cd /tmp && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si)
       rm -rf /tmp/yay
     yay -Sy
     fi
   else
-    pacman_install="sudo apt-get -y install"
+    pacman_install="sudo apt -y install"
     sudo apt-get update
   fi
 
@@ -175,55 +172,34 @@ else
   SYS_PIP="/usr/bin/pip"
   [[ -f $SYS_PYTHON ]] || $pacman_install python
   [[ -f $SYS_PIP ]] || $pacman_install python-pip
-  $SYS_PIP install --user powerline-status
-  $SYS_PIP install --user powerline-gitstatus
-  $SYS_PIP install --user powerline-pyenv
-
-  # exa
   if is_arch; then
-    ins_wrap exa
+    $pacman_install powerline
+    $pacman_install python-powerline-gitstatus
   else
-    if ! bin_exists exa; then
-      tmpf=$(mktemp)
-      wget $(fetch_url_github_latest_release_binary ogham/exa linux-x86_64) -O "$tmpf" \
-        && unzip "$tmpf" -d ~/local/bin \
-        && rm "$tmpf" \
-        && mv ~/local/bin/exa-linux-x86_64 ~/local/bin/exa
-    fi
+    $SYS_PIP install --user powerline-status
+    $SYS_PIP install --user powerline-gitstatus
   fi
+  $SYS_PIP install --user powerline-pyenv
 
   # Keychain
   ins_wrap keychain
 
   # fd
   if is_arch; then
-    ins_wrap fd fd-rs
+    ins_wrap fd
   else
     ins_wrap fd fd-find
     sudo ln -s /usr/bin/fdfind /usr/bin/fd
   fi
 
-  # nvm
-  bin_exists nvm || git clone https://github.com/creationix/nvm.git ~/.nvm
-
-  # rbenv & ruby-build
-  if ! bin_exists rbenv; then
-    git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-  fi
-
-  # copyq
-  if is_arch; then
-    ins_wrap copyq
-  fi
-
   # clipper
+  install_clipper=NO
   if [ -n "$DISPLAY" ]; then
     while :; do
       read -p 'Graphic session detected. Do you want to install clipper(go will also be installed)[Y/n]' yn
       case $yn in
         [Yy]*|"" ) install_clipper=YES; break;;
-        [Nn]* ) install_clipper=NO; break;;
+        [Nn]* ) break;;
         * ) echo "Please answer y or n.";;
       esac
     done
@@ -234,11 +210,8 @@ else
     else
       ins_wrap go golang-go
     fi
-    which clipper > /dev/null || go get github.com/wincent/clipper
+    bin_exists clipper || go get github.com/wincent/clipper
   fi
-
-  # pdftotext
-  ins_wrap pdftotext poppler-utils
 fi
 
 # Git repos
