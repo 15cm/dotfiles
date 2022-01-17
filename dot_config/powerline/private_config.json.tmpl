@@ -6,11 +6,11 @@
         "continuation": "continuation",
         "select": "select"
       },
-      {{- if eq .global.theme "light"}}
+      {{if (eq .global.theme "light")}}
       "colorscheme": "solarized-light"
-      {{- else}}
+      {{else}}
       "colorscheme": "nord"
-      {{- end}}
+      {{end}}
     },
     "wm": {
       "theme": "default",
@@ -18,11 +18,11 @@
     },
     "tmux": {
       "theme": "default",
-      {{- if eq .global.theme "light"}}
+      {{if (eq .global.theme "light")}}
       "colorscheme": "solarized-light"
-      {{- else}}
+      {{else}}
       "colorscheme": "nord"
-      {{- end}}
+      {{end}}
     },
     "vim": {
       "theme": "default",

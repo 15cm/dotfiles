@@ -106,11 +106,11 @@ set show_hidden_bookmarks true
 
 # Which colorscheme to use?  These colorschemes are available by default:
 # default, jungle, snow, solarized
-{{- if eq .global.theme "light"}}
+{{if (eq .global.theme "light")}}
 set colorscheme custom-light
-{{- else}}
+{{else}}
 set colorscheme custom-dark
-{{- end}}
+{{end}}
 
 # Preview files on the rightmost column?
 # And collapse (shrink) the last column if there is nothing to preview?

@@ -148,13 +148,13 @@ set foldcolumn=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorsheme
 
-{{- if eq .global.theme "light"}}
+{{if (eq .global.theme "light")}}
 set background=light
 colorscheme solarized
-{{- else}}
+{{else}}
 set background=dark
 colorscheme Tomorrow-Night
-{{- end}}
+{{end}}
 
 " Enable syntax highlighting
 syntax enable 

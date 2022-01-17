@@ -98,7 +98,7 @@ font:
     render_timer: false
 
 colors:
-  {{- if eq .global.theme "light"}}
+  {{if (eq .global.theme "light")}}
   primary:
     background: '0xfdf6e3'
     foreground: '0x586e75'
@@ -129,7 +129,7 @@ colors:
     magenta: '0x6c71c4'
     cyan:    '0x93a1a1'
     white:   '0xfdf6e3'
-  {{- else}}
+  {{else}}
   primary:
     background: '0x1d1f21'
     foreground: '0xc5c8c6'
@@ -160,7 +160,7 @@ colors:
     magenta: '0xb77ee0'
     cyan:    '0x54ced6'
     white:   '0x282a2e'
-  {{- end}}
+  {{end}}
 
 # Visual Bell
 #
@@ -409,7 +409,7 @@ key_bindings:
   # other fixes
   - { key: Space, mods: Control, chars: "\x00" }
 
-  {{- if eq .chezmoi.os "darmin"}}
+  {{if (eq .chezmoi.os "darmin")}}
   # Fix alt on Mac
   - { key: A,        mods: Alt,       chars: "\x1ba"                       }
   - { key: B,        mods: Alt,       chars: "\x1bb"                       }
@@ -478,4 +478,4 @@ key_bindings:
   - { key: Period,   mods: Alt,       chars: "\x1b."                       } # Alt + .
   - { key: Key8,     mods: Alt|Shift, chars: "\x1b*"                       } # Alt + *
   - { key: Key3,     mods: Alt|Shift, chars: "\x1b#"                       } # Alt + #
-{{- end}}
+{{end}}

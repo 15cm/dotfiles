@@ -76,9 +76,9 @@ export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="_ ll vi"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting cd-gitroot zce docker alias-tips)
 
 # Extra plugins for NAS
-{{- if eq .chezmoi.hostname "sachi" "amane"}}
+{{if (eq .chezmoi.hostname "sachi" "amane")}}
 plugins+=(yadm)
-{{- end}}
+{{end}}
 # _____________________ Plugins _____________________
 
 # --------------------- Completions ---------------------

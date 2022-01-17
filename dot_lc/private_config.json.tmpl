@@ -8,18 +8,18 @@
   },
   "color": {
     "enable": true,
-    {{- if eq .global.theme "light"}}
+    {{if (eq .global.theme "light")}}
     "theme": "solarized.light"
-    {{- else}}
+    {{else}}
     "theme": "dark"
-    {{- end}}
+    {{end}}
   },
   "icon": {
-    {{- if eq .global.theme "light"}}
+    {{if (eq .global.theme "light")}}
     "theme": "solarized.light"
-    {{- else}}
+    {{else}}
     "theme": "dark"
-    {{- end}}
+    {{end}}
   },
   "network": {
     "concurrency": 10

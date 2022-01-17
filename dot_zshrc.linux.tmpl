@@ -16,11 +16,11 @@ alias scu="systemctl --user"
 alias rk="refresh-kde.sh"
 alias rx="refresh-xsession.sh > /dev/null 2>&1"
 
-{{- if eq .chezmoi.hostname "kazuki"}}
+{{if (eq .chezmoi.hostname "kazuki")}}
 alias ssh="TERM=xterm-256color ssh -F ~/.ssh/interactive.conf"
-{{- else}}
+{{else}}
 alias ssh="TERM=xterm-256color ssh"
-{{- end}}
+{{end}}
 # _____________________ Alias _____________________
 
 # --------------------- Misc ---------------------

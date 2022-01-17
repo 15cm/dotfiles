@@ -1,11 +1,11 @@
 icons = "awesome"
 
 [theme]
-{{- if eq .global.theme "light"}}
+{{if (eq .global.theme "light")}}
 name = "solarized-light"
-{{- else}}
+{{else}}
 name = "modern"
-{{- end}}
+{{end}}
 [theme.overrides]
 separator = ""
 

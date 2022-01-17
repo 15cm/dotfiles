@@ -37,11 +37,11 @@ FILE_EXTENSION_LOWER=$(echo ${FILE_EXTENSION} | tr '[:upper:]' '[:lower:]')
 HIGHLIGHT_SIZE_MAX=262143  # 256KiB
 HIGHLIGHT_TABWIDTH=8
 
-{{- if eq .global.theme "light"}}
+{{if (eq .global.theme "light")}}
 HIGHLIGHT_STYLE="solarized-light"
-{{- else}}
+{{else}}
 HIGHLIGHT_STYLE="moria"
-{{- end}}
+{{end}}
 
 PYGMENTIZE_STYLE='autumn'
 

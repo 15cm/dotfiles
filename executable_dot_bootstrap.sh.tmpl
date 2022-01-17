@@ -268,11 +268,11 @@ wget -nc -P ~/.vim/colors https://github.com/chriskempson/tomorrow-theme/raw/mas
 # tpm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-{{- if eq .chezmoi.os "darwin"}}
+{{if (eq .chezmoi.os "darwin")}}
 # Karabiner config
 git clone ${git_repo_url_prefix}15cm/karabiner-config.git ~/.config/karabiner
-{{- else}}
-{{- end}}
+{{else}}
+{{end}}
 
 # yadm zsh plugin
 git clone https://github.com/15cm/yadm-zsh ~/.oh-my-zsh/custom/plugins/yadm
