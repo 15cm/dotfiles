@@ -153,9 +153,11 @@ else
     ins_wrap nc netcat
   fi
 
-  # pip3
-  if ! is_arch; then
-    ins_wrap pip3 python3-pip
+  # Python
+  if is_arch; then
+    $pacman_install python-pipx
+  else
+      ins_wrap pip3 python3-pip
   fi
 
   # ranger(py3)
@@ -173,13 +175,13 @@ else
   [[ -f $SYS_PYTHON ]] || $pacman_install python
   [[ -f $SYS_PIP ]] || $pacman_install python-pip
   if is_arch; then
-    $pacman_install powerline
-    $pacman_install python-powerline-gitstatus
+    pipx install powerline-status
+    pipx inject powerline-status powerline-gitstatus
+    pipx inject powerline-status powerline-pyenv
   else
     $SYS_PIP install --user powerline-status
     $SYS_PIP install --user powerline-gitstatus
   fi
-  $SYS_PIP install --user powerline-pyenv
 
   # Keychain
   ins_wrap keychain
@@ -236,10 +238,8 @@ fi
 
 # pyenv
 if ! bin_exists pyenv; then
-  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-  git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
-  git clone git://github.com/pyenv/pyenv-pip-migrate.git ~/.pyenv/plugins/pyenv-pip-migrate
-  git clone https://github.com/pyenv/pyenv-which-ext.git ~/.pyenv/plugins/pyenv-which-ext
+  $pacman_install pyenv
+  $pacman_install pyenv-virtualenv
 fi
 
 # Ranger icon support
