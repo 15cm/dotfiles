@@ -12,7 +12,7 @@ if exec_exists black && exec_exists isort && exec_exists docformatter && exec_ex
   f="$(mktemp).py"
   black -q - | isort - | docformatter - > $f
   if [ "$fname" != "__init__.py" ]; then
-    pycln -s $f
+    pycln -a -s $f 2>/dev/null
   fi
   cat $f
   rm -f $f
