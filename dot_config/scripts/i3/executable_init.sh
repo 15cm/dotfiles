@@ -27,3 +27,8 @@ systemctl --user import-environment ${systemd_envs[@]}
 # Starting things with i3
 systemctl --user start i3-session.target
 systemctl --user start xsession.target
+
+cmd_exists () {
+  command -v $1 > /dev/null
+}
+cmd_exists powerline-daemon && powerline-daemon --replace
