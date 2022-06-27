@@ -175,11 +175,11 @@ bindsym XF86AudioPrev exec "playerctl -p clementine previous"
 bindsym $mod+Shift+z mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym l exec --no-startup-id ~/.config/scripts/i3/i3exit.sh lock, mode "default"
+    bindsym s exec --no-startup-id ~/.config/scripts/i3/i3exit.sh suspend, mode "default"
+    bindsym u exec --no-startup-id ~/.config/scripts/i3/i3exit.sh switch_user, mode "default"
+    bindsym e exec --no-startup-id ~/.config/scripts/i3/i3exit.sh logout, mode "default"
+    bindsym r exec --no-startup-id ~/.config/scripts/i3/i3exit.sh reboot, mode "default"
     bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
 
     # exit system mode: "Enter" or "Escape"
