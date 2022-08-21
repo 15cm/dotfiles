@@ -49,13 +49,8 @@ format_swap = "{swap_used_percents}"
 
 [[block]]
 block = "cpu"
-interval = 1
+interval = 3
 
-
-[[block]]
-block = "load"
-interval = 1
-format = "{1m}"
 
 [[block]]
 block = "disk_space"
@@ -63,9 +58,10 @@ path = "/"
 alias = "/"
 info_type = "available"
 unit = "GB"
-interval = 20
+interval = 1800
 warning = 20.0
 alert = 10.0
+format = "{icon} {available}"
 
 
 [[block]]
