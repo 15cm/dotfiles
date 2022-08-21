@@ -1,10 +1,22 @@
 ! X
+{{if (eq .chezmoi.hostname "kazuki")}}
 Xft.dpi: 192
+{{else if (eq .chezmoi.hostname "asako")}}
+Xft.dpi: 120
+{{else}}
+Xft.dpi: 96
+{{end}}
 Xft.rgba: rgb
 Xft.antialias: true
 Xft.hinting: true
 Xft.lcdfilter: lcddefault
+{{if (eq .chezmoi.hostname "kazuki")}}
 Xcursor.size: 48
+{{else if (eq .chezmoi.hostname "asako")}}
+Xcursor.size: 30
+{{else}}
+Xcursor.size: 24
+{{end}}
 
 ! Nord color scheme
 ! Copyright (c) 2016-present Arctic Ice Studio <development@arcticicestudio.com>

@@ -4,18 +4,31 @@ export XCURSOR_PATH=/usr/share/icons
 
 # Qt
 export QT_QPA_PLATFORMTHEME=qt5ct
+{{if (eq .chezmoi.hostname "kazuki")}}
 export QT_SCREEN_SCALE_FACTORS=2
-export QT_AUTO_SCREEN_SCALE_FACTOR=1 
+{{else if (eq .chezmoi.hostname "asako")}}
+export QT_SCREEN_SCALE_FACTORS=1.25
+{{end}}
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 # Gtk
+{{if (eq .chezmoi.hostname "kazuki")}}
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
+{{else if (eq .chezmoi.hostname "asako")}}
+export GDK_SCALE=1.25
+export GDK_DPI_SCALE=0.8
+{{end}}
 
 # Fix systemctl --user
 export XDG_RUNTIME_DIR=/run/user/`id -u`
 
 # Alacritty hdpi
-export WINIT_HIDPI_FACTOR=2.0
+{{if (eq .chezmoi.hostname "kazuki")}}
+export WINIT_HIDPI_FACTOR=2
+{{else if (eq .chezmoi.hostname "asako")}}
+export WINIT_HIDPI_FACTOR=1.25
+{{end}}
 
 export INPUT_METHOD=fcitx5
 export GTK_IM_MODULE=fcitx5
