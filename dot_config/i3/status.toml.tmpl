@@ -63,6 +63,10 @@ warning = 20.0
 alert = 10.0
 format = "{icon} {available}"
 
+{{if (eq .chezmoi.hostname "asako")}}
+[[block]]
+block = "backlight"
+{{end}}
 
 [[block]]
 block = "sound"
@@ -71,3 +75,18 @@ block = "sound"
 block = "time"
 interval = 60
 format = "%a %m/%d/%Y %R"
+
+{{if (eq .chezmoi.hostname "asako")}}
+[[block]]
+block = "battery"
+driver = "upower"
+format = "{percentage} {time}"
+[block.theme_overrides]
+{{if (eq .global.theme "light")}}
+good_bg = "#fdf6e3" # base3
+good_fg = "#586e75" # base01
+{{else}}
+good_bg = "#2e3440" # nord0
+good_fg = "#81a1c1" # light blue
+{{end}}
+{{end}}
