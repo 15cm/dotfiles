@@ -10,18 +10,27 @@ name = "nord-dark"
 separator = ""
 
 [[block]]
-block = "nvidia_gpu"
-label = ""
-show_temperature = false
-show_memory = true
-show_clocks = false
-interval = 5
+block = "networkmanager"
+interface_name_exclude = ['br\-[0-9a-f]{12}', 'docker\d+']
+interface_name_include = []
+[block.theme_overrides]
+{{if (eq .global.theme "light")}}
+good_bg = "#fdf6e3" # base3
+good_fg = "#586e75" # base01
+{{else}}
+good_bg = "#2e3440" # nord0
+good_fg = "#81a1c1" # light blue
+{{end}}
 
 [[block]]
 block = "net"
-device = "{{ .hardware.ethernet_device }}"
-format = "{ip} {speed_down;K} {graph_down;K} {speed_up;K} {graph_up;K}"
+format = "{speed_down;K} {graph_down;K} {speed_up;K} {graph_up;K}"
 interval = 5
+[block.icons_overrides]
+net_wired = ""
+net_wireless = ""
+net_vpn = ""
+net_loopback = ""
 
 [[block]]
 block = "memory"
