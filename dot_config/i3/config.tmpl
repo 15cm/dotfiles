@@ -226,12 +226,17 @@ bindsym $mod+r mode "resize_move"
 
 # Window floating
 for_window [class="yakuake"] floating enable;
+{{if (eq .chezmoi.hostname "kazuki")}}
 for_window [class="keepassxc" class="KeePassXC"] floating enable, resize set 2400 1400, move position center
 for_window [class="GoldenDict"] floating enable, move position center, resize set 2400 1200, move position center;
+for_window [class="^Anki$"] floating enable, resize set 1600 600, move position center; mark anki
+{{else if (eq .chezmoi.hostname "asako")}}
+for_window [class="keepassxc" class="KeePassXC"] floating enable, resize set 800 400, move position center
+for_window [class="GoldenDict"] floating enable, move position center, resize set 800 400, move position center;
+for_window [class="^Anki$"] floating enable, resize set 600 300, move position center; mark anki
+{{end}}
 for_window [class="Clementine"] floating disable;
 for_window [instance="^copyq$" class="^Copyq$"] border pixel 0, floating enable, move position center
-# You will need to replace Title depending on your l10n
-for_window [class="^Anki$"] floating enable, resize set 1600 600, move position center; mark anki
 for_window [class="antimicrox"] floating disable;
 
 bar {
