@@ -1,0 +1,9 @@
+[Unit]
+Description=Easyeffects daemon
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/easyeffects --gapplication-service
+
+[Install]
+WantedBy=xsession.target
