@@ -1,0 +1,7 @@
+{{if (eq .chezmoi.hostname "kazuki")}}
+hwdec=auto
+vo=gpu
+{{else if (eq .chezmoi.hostname "asako")}}
+hwdec=vdpau-copy
+vo=gpu
+{{end}}
