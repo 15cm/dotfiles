@@ -6,8 +6,7 @@
 # Fix for emacs tramp mode
 [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
 
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZPLUG_HOME=$HOME/.zplug
 
 # Disable updates
 DISABLE_UPDATE_PROMPT=true
@@ -73,16 +72,27 @@ export ZSH_AUTOSUGGEST_USE_ASYNC=true
 # Alias tips
 export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="_ ll vi"
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting cd-gitroot zce docker alias-tips yadm)
+source ${ZPLUG_HOME}/init.zsh
 
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "mollifier/cd-gitroot"
+zplug "15cm/yadm-zsh"
+zplug "15cm/zce.zsh"
+
+# zplug check returns true if all packages are installed
+# Therefore, when it returns false, run zplug install
+if ! zplug check; then
+  zplug install
+fi
+
+# source plugins and add commands to the PATH
+zplug load
 # _____________________ Plugins _____________________
 
 # --------------------- Completions ---------------------
 fpath+=$HOME/.zfunc
 # _____________________ Completions _____________________
-
-# oh-my-zsh
-source $ZSH/oh-my-zsh.sh
 
 # --------------------- Key map ---------------------
 export KEYTIMEOUT=5

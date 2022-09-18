@@ -243,12 +243,8 @@ fi
 # Ranger icon support
 git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
 
-# Oh-my-zsh
-git clone --recurse-submodules ${git_repo_url_prefix}15cm/oh-my-zsh.git ~/.oh-my-zsh
-if [[ ${use_ssh_url} == YES ]]; then
-  # Change submodule urls to SSH ones
-  sed -i 's|\(url = \)https://.*github.com/\(15cm.*\)|\1git@github.com:\2|' ~/.oh-my-zsh/.git/config
-fi
+# zplug
+git clone https://github.com/zplug/zplug ~/.zplug
 
 # Spacemacs
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d && (cd ~/.emacs.d && git checkout develop)
