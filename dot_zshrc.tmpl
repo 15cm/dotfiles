@@ -2,19 +2,21 @@
 # _____________________ profiling _____________________
 
 
-# --------------------- Common Config ---------------------
+# ---------------------Essentials---------------------
 # Fix for emacs tramp mode
 [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
 
 export ZPLUG_HOME=$HOME/.zplug
 
-# Disable updates
-DISABLE_UPDATE_PROMPT=true
-DISABLE_AUTO_UPDATE=true
 # Disable Ctrl-s which freezes the terminal
 stty -ixon
 
-# _____________________ Common Config _____________________
+# Required for history related plugin like zsh-autosuggestions, fzf to work.
+export HISTFILE=~/.zsh_history
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
+
+# _____________________Essentials_____________________
 
 # --------------------- Helpers ---------------------
 sys_name=$(uname -s)
@@ -66,28 +68,19 @@ export TLDR_COLOR_PARAMETER="blue"
 # _____________________ ENV _____________________
 
 # --------------------- Plugins ---------------------
-# Auto suggestions
-export ZSH_AUTOSUGGEST_USE_ASYNC=true
-
-# Alias tips
-export ZSH_PLUGINS_ALIAS_TIPS_EXCLUDES="_ ll vi"
-
 source ${ZPLUG_HOME}/init.zsh
 
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-completions",              defer:0
+zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autosuggestions"
 zplug "mollifier/cd-gitroot"
 zplug "15cm/yadm-zsh"
 zplug "15cm/zce.zsh"
+zplug "plugins/fzf", from:oh-my-zsh
 
-# zplug check returns true if all packages are installed
-# Therefore, when it returns false, run zplug install
-if ! zplug check; then
-  zplug install
-fi
-
-# source plugins and add commands to the PATH
-zplug load
+# Auto suggestions
+export ZSH_AUTOSUGGEST_USE_ASYNC=true
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#a8a8a8,underline"
 # _____________________ Plugins _____________________
 
 # --------------------- Completions ---------------------
@@ -389,6 +382,7 @@ alias rp="realpath"
 # checked for alias expansion.
 # http://www.gnu.org/software/bash/manual/bashref.html#Aliases
 alias sudo="sudo "
+alias _="sudo"
 
 # Leetcode
 alias lc="leetcode"
@@ -422,5 +416,13 @@ alias sshfs='sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3' # 
 
 # _____________________ Common Alias _____________________
 
+# zplug check returns true if all packages are installed
+# Therefore, when it returns false, run zplug install
+if ! zplug check; then
+  zplug install
+fi
+
+# source plugins and add commands to the PATH
+zplug load
 # --------------------- profiling ---------------------
 # zprof
