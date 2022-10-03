@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=(Priority Override) VMware Workstation
+Comment=Run and manage virtual machines
+Exec=nice -n -5 dex /usr/share/applications/vmware-workstation.desktop
+Terminal=false
+Type=Application
+Icon=vmware-workstation
+StartupNotify=true
+StartupWMClass=vmware
+Categories=System;
+MimeType=application/x-vmware-vm;application/x-vmware-team;application/x-vmware-enc-vm;x-scheme-handler/vmrc;
