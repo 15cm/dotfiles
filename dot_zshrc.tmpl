@@ -217,8 +217,7 @@ if which exa > /dev/null; then
   alias la="$_ls_cmd -al --git --group --header"
   alias ll="$_ls_cmd -l --git --group --header"
   alias l="$_ls_cmd -l --git"
-  alias tree="$_ls_cmd --tree --level 2 -l --git"
-  alias tree2="$_ls_cmd --tree"
+  alias tree="$_ls_cmd --tree --level 2 --git"
   _tree_cmd="$_ls_cmd --tree --level 2"
 else
   _ls_cmd="ls --color=tty --group-directories-first"
@@ -369,6 +368,31 @@ fi
 # _____________________ Powerline _____________________
 
 # --------------------- Common Alias ---------------------
+
+# Directories
+setopt autocd
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushdminus
+
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
+alias -- -='cd -'
+alias 1='cd -1'
+alias 2='cd -2'
+alias 3='cd -3'
+alias 4='cd -4'
+alias 5='cd -5'
+alias 6='cd -6'
+alias 7='cd -7'
+alias 8='cd -8'
+alias 9='cd -9'
+
+alias md="mkdir -p"
+
 alias stl="set-theme.sh light"
 alias std="set-theme.sh dark"
 alias rz='exec $SHELL'
@@ -381,7 +405,6 @@ alias cdg="cd-gitroot"
 alias prl="parallel"
 alias grep="grep --color=auto"
 alias rp="realpath"
-alias md="mkdir -p"
 # Allows alias after sudo. If the last character of the alias value is a space
 # or tab character, then the next command word following the alias is also
 # checked for alias expansion.
