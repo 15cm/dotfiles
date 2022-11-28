@@ -76,17 +76,27 @@ zstyle ':completion:*' menu select
 source ${ZPLUG_HOME}/init.zsh
 
 zplug "zsh-users/zsh-completions",              defer:0
-zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-autosuggestions",          defer:2, on:zsh-users/zsh-completions
+zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:zsh-users/zsh-autosuggestions
 zplug "mollifier/cd-gitroot"
 zplug "15cm/yadm-zsh"
 zplug "15cm/zce.zsh"
 zplug "plugins/fzf", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
+zplug "skywind3000/z.lua"
 
 # Auto suggestions
 export ZSH_AUTOSUGGEST_USE_ASYNC=true
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#a8a8a8,underline"
+
+# zplug check returns true if all packages are installed
+# Therefore, when it returns false, run zplug install
+if ! zplug check; then
+  zplug install
+fi
+
+# source plugins and add commands to the PATH
+zplug load
 # _____________________ Plugins _____________________
 
 # --------------------- Completions ---------------------
@@ -232,8 +242,8 @@ fi
 # _____________________ exa _____________________
 
 # --------------------- z ---------------------
-export _Z_DATA="$HOME/.z/.z"
-. ~/.z/z.sh
+# export _Z_DATA="$HOME/.z/.z"
+# . ~/.z/z.sh
 # _____________________ z _____________________
 
 # Navi
@@ -294,7 +304,7 @@ _fzf_compgen_dir() {
 
 # fzf z binding
 __fzf_z() {
-  z -l | sed 's/^[0-9,.]* *//' \
+  z -i | sed 's/^[0-9,.]* *//' \
     | fzf --tac --reverse --preview "$_tree_cmd {} | head -200" --preview-window right:30%
 }
 
@@ -446,13 +456,9 @@ alias sshfs='sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3' # 
 
 # _____________________ Common Alias _____________________
 
-# zplug check returns true if all packages are installed
-# Therefore, when it returns false, run zplug install
-if ! zplug check; then
-  zplug install
-fi
+# --------------------- Nix Home Manager ---------------------
+export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
+# _____________________ Nix Home Manager _____________________
 
-# source plugins and add commands to the PATH
-zplug load
 # --------------------- profiling ---------------------
 # zprof
